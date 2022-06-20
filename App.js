@@ -3,8 +3,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import BottomTabbe from './screens/BottomTabbe';
 import Menu from './screens/MainMenu/Menu';
-import Register from './screens/auth/Register';
-import Login from './screens/auth/Login';
+import Register from './screens/Auth/Register';
+import Login from './screens/Auth/Login';
 
 const Stack = createStackNavigator();
 
