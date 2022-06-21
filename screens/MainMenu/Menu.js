@@ -4,14 +4,24 @@ import Button from '../../components/Button';
 import {Colors} from '../../components/constants';
 
 const Menu = ({navigation}) => {
+  const Register = () => {
+    navigation.navigate('Register');
+  };
   const Login = () => {
     navigation.navigate('Login');
   };
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/Logo.png')} style={styles.logoimg} />
-      <Button navigation={navigation} label={'Register'} onPress={Login} />
-      <Button navigation={navigation} label={'Login'} onPress={Login} />
+      <View style={styles.main}>
+        <Image
+          source={require('../../assets/Logo.png')}
+          style={styles.logoimg}
+        />
+      </View>
+      <View style={styles.footer}>
+        <Button navigation={navigation} label={'Register'} onPress={Register} />
+        <Button navigation={navigation} label={'Login'} onPress={Login} />
+      </View>
     </View>
   );
 };
@@ -21,8 +31,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.WHITE,
   },
+  main: {width: '100%', height: '100%', alignItems: 'center'},
   logoimg: {
-    width: '100%',
+    width: '70%',
     height: 100,
+    marginTop: 60,
+  },
+  footer: {
+    width: '100%',
+    marginBottom: 0,
+    bottom: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
   },
 });
