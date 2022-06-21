@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     // color: Colors.infos,
     backgroundColor: Colors.RED,
+    elevation: 7,
     alignItems: 'center',
     justifyContent: 'center',
   },
