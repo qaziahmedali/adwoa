@@ -5,7 +5,12 @@ import BottomTabbe from './screens/BottomTabbe';
 import Menu from './screens/MainMenu/Menu';
 import Register from './screens/Auth/Register';
 import Login from './screens/Auth/Login';
-
+import Contact from './screens/Contact/Contact';
+import ForgetPasswordEmail from './screens/Auth/ForgetPassword/ForgetPasswordEmail';
+import VerificationCode from './screens/Auth/ForgetPassword/VerificationCode';
+import NewPassword from './screens/Auth/ForgetPassword/NewPassword';
+import ChatBodyHeader from './screens/Chat/ChatBodyHeader';
+import Drawers from './components/Drawers';
 const Stack = createStackNavigator();
 
 function App() {
@@ -28,8 +33,39 @@ function App() {
           options={{headerShown: false}}
         />
         <Stack.Screen
+          name="ForgetPasswordEmail"
+          component={ForgetPasswordEmail}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="VerificationCode"
+          component={VerificationCode}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="NewPassword"
+          component={NewPassword}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Contact"
+          component={Contact}
+          options={{headerShown: false}}
+        />
+        {/* <Stack.Screen
+          name="Drawer"
+          component={Drawers}
+          options={{headerShown: false}}
+        /> */}
+        <Stack.Screen
           name="BottomTabbe"
           component={BottomTabbe}
+          options={{headerShown: false}}
+        />
+
+        <Stack.Screen
+          name="ChatBodyHeader"
+          component={ChatBodyHeader}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

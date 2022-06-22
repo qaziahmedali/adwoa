@@ -20,7 +20,7 @@ export default Button;
 const styles = StyleSheet.create({
   btn: {
     width: '100%',
-    height: 58,
+    height: 48,
     borderRadius: 12,
     // color: Colors.infos,
     backgroundColor: Colors.RED,

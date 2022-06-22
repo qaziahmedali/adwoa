@@ -1,36 +1,73 @@
 import React from 'react';
-import {Text, View, StyleSheet, Image, TextInput} from 'react-native';
+import {
+  ScrollView,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  Image,
+  TextInput,
+  Text,
+} from 'react-native';
 import {Colors} from '../../components/constants';
 import Button from '../../components/Button';
+
 import Header from './header';
-import {RFValue} from 'react-native-responsive-fontsize';
+// import {RFValue} from 'react-native-responsive-fontsize';
 
 const Login = ({navigation}) => {
+  const ForgetPassword = () => {
+    navigation.navigate('ForgetPasswordEmail');
+  };
+  const handleData = () => {
+    navigation.navigate('BottomTabbe');
+  };
   return (
     <View style={styles.container}>
-      <Header />
-      <View style={styles.mainForBody}>
-        <Image
-          source={require('../../assets/Logo.png')}
-          style={styles.logoimg}
-        />
-      </View>
-      <View style={styles.main}>
-        <View style={styles.textinputView}>
-          <View style={styles.textinputView1}>
-            <TextInput
-              style={styles.inputEmail}
-              label="Email"
-              placeholder="Enter Email"
-              // value={email}
-              // onChangeText={setEmail}
+      <Header label={'Admin Login'} />
+
+      <ScrollView>
+        <View style={styles.mainForBody}>
+          <View style={styles.mainImg}>
+            <Image
+              source={require('../../assets/Logo.png')}
+              style={styles.logoImg}
+              resizeMode="contain"
             />
           </View>
+          <View style={styles.inputView}>
+            <TextInput
+              placeholder="Email Address"
+              placeholderTextColor={Colors.GREY}
+              color={Colors.GREY}
+              style={styles.inputs}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              placeholder="Password"
+              placeholderTextColor={Colors.GREY}
+              color={Colors.GREY}
+              style={styles.inputs}
+              secureTextEntry={true}
+            />
+          </View>
+          <View style={styles.forgetButton}>
+            <TouchableOpacity>
+              <Text
+                navigation={navigation}
+                onPress={ForgetPassword}
+                style={styles.forgetBtnText}>
+                Forget Password?
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <Button
+            navigation={navigation}
+            label={'Login'}
+            onPress={handleData}
+          />
         </View>
-      </View>
-      <View style={styles.footer}>
-        <Button navigation={navigation} label={'Login'} onPress={Login} />
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -40,63 +77,44 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
   },
   mainForBody: {
-    width: '97%',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '100%',
-    color: 'black',
+    flex: 0.9,
   },
-  logoimg: {
-    width: '100%',
-    height: 100,
+  logoImg: {
+    marginTop: 20,
+    width: '70%',
+    height: 90,
   },
+  mainImg: {width: '100%', alignItems: 'center'},
+  inputs: {
+    paddingHorizontal: 10,
+  },
+  // inputEmail: {
+  //   borderRadius: 10,
+  //   width: '100%',
+  //   paddingLeft: 10,
+  //   height: Platform.OS === 'ios' ? 40 : 40,
+  //   borderColor: Colors.GREY,
+  //   fontSize: RFValue(10, 580),
+  //   fontFamily: 'Poppins-Regular',
+  //   color: Colors.WHITE,
+  // },
   inputView: {
     width: '90%',
     borderWidth: 1,
-  },
-  header: {
-    width: '100%',
-    height: '30%',
-  },
-  main: {width: '100%', height: '40%'},
-  logoimg: {
-    width: '100%',
-    height: 120,
-    marginTop: 60,
-  },
-  footer: {
-    width: '100%',
-    marginBottom: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    height: '30%',
-  },
-  inputEmail: {
+    borderColor: Colors.GREY,
     borderRadius: 10,
-    width: '100%',
-    paddingLeft: 10,
-    height: Platform.OS === 'ios' ? 40 : 40,
-    borderColor: '#000',
-    fontSize: RFValue(10, 580),
-    fontFamily: 'Poppins-Regular',
-    color: Colors.WHITE,
+    marginVertical: 7,
   },
-  textinputView: {
-    width: '100%',
-    borderColor: Colors.BLACK,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 35,
-    paddingVertical: 40,
-  },
-  textinputView1: {
+  forgetButton: {
     width: '90%',
-    borderWidth: 2,
-    borderColor: Colors.BLACK,
-    borderRadius: 10,
+    marginVertical: 4,
+  },
+  forgetBtnText: {
+    color: Colors.GREY,
+    alignSelf: 'flex-end',
   },
 });
 export default Login;
