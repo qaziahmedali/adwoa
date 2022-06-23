@@ -31,7 +31,7 @@ const Chats = ({navigation}) => {
             resizeMode="contain"
           />
           <View style={styles.userview}>
-            <Text style={styles.userName}>M.zulqarnain</Text>
+            <Text style={styles.userName}>Room</Text>
             <Text>online</Text>
           </View>
         </View>

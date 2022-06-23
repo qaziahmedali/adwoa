@@ -16,6 +16,7 @@ const Menu = ({navigation}) => {
         <Image
           source={require('../../assets/Logo.png')}
           style={styles.logoimg}
+          resizeMode="contain"
         />
       </View>
       <View style={styles.footer}>

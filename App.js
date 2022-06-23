@@ -10,14 +10,16 @@ import ForgetPasswordEmail from './screens/Auth/ForgetPassword/ForgetPasswordEma
 import VerificationCode from './screens/Auth/ForgetPassword/VerificationCode';
 import NewPassword from './screens/Auth/ForgetPassword/NewPassword';
 import ChatBodyHeader from './screens/Chat/ChatBodyHeader';
+import HomeDetail from './screens/Home/HomeDetail';
 import Drawers from './components/Drawers';
+import Faq from './screens/Contact/Faq';
 const Stack = createStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Menu"
           component={Menu}
           options={{headerShown: false}}
@@ -46,26 +48,37 @@ function App() {
           name="NewPassword"
           component={NewPassword}
           options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Contact"
-          component={Contact}
-          options={{headerShown: false}}
-        />
+        /> */}
+
         {/* <Stack.Screen
           name="Drawer"
           component={Drawers}
           options={{headerShown: false}}
         /> */}
         <Stack.Screen
+          name="HomeDetail"
+          component={HomeDetail}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name="BottomTabbe"
           component={BottomTabbe}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Contact"
+          component={Contact}
           options={{headerShown: false}}
         />
 
         <Stack.Screen
           name="ChatBodyHeader"
           component={ChatBodyHeader}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Faq"
+          component={Faq}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

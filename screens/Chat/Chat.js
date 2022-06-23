@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Text,
   View,
-  TextInput,
   StyleSheet,
   ScrollView,
   Image,
@@ -17,7 +16,6 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {} from 'react-native-gesture-handler';
 const Chat = ({navigation}) => {
   const GoBack = () => {
     navigation.goBack();
@@ -26,21 +24,20 @@ const Chat = ({navigation}) => {
     navigation.navigate('ChatBodyHeader');
   };
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.mainForHeader}>
-          <AntDesign
-            name="arrowleft"
-            size={wp(6)}
-            color={Colors.WHITE}
-            style={styles.icon}
-            onPress={GoBack}
-          />
-          <View style={styles.headerTextView}>
-            <Text style={styles.headerText}>Recent Chat</Text>
-          </View>
+    <View style={styles.container}>
+      <View style={styles.mainForHeader}>
+        <AntDesign
+          name="arrowleft"
+          size={wp(6)}
+          color={Colors.WHITE}
+          style={styles.icon}
+          onPress={GoBack}
+        />
+        <View style={styles.headerTextView}>
+          <Text style={styles.headerText}>Recent Chat</Text>
         </View>
-
+      </View>
+      <ScrollView>
         <View style={styles.chatsListView}>
           <Image
             source={require('../../assets/user.jpg')}
@@ -67,8 +64,8 @@ const Chat = ({navigation}) => {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -92,6 +89,7 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
     alignSelf: 'flex-start',
     fontWeight: '600',
+    fontSize: RFValue(17, 700),
   },
   iconView: {
     marginVertical: 12,

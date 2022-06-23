@@ -17,6 +17,9 @@ const Register = ({navigation}) => {
   const handleData = () => {
     navigation.navigate('Login');
   };
+  const Login = () => {
+    navigation.navigate('Login');
+  };
   return (
     <View style={styles.container}>
       <Header label={'Admin Register'} />
@@ -54,6 +57,16 @@ const Register = ({navigation}) => {
               style={styles.inputs}
               secureTextEntry={true}
             />
+          </View>
+          <View style={styles.forgetButton}>
+            <TouchableOpacity>
+              <Text
+                navigation={navigation}
+                style={styles.forgetBtnText}
+                onPress={Login}>
+                Sign in
+              </Text>
+            </TouchableOpacity>
           </View>
           <Button
             navigation={navigation}

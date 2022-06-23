@@ -16,25 +16,13 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import AdminDetail from './adminDetail';
+import Header from '../../components/modalHeader';
 const Contact = ({navigation}) => {
   return (
-    <ScrollView>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.mainForHeader}>
-          {/* <Pressable onPress={() => setModalVisible(!modalVisible)}> */}
-          <Pressable>
-            <Feather
-              name="menu"
-              size={wp(6)}
-              color={Colors.WHITE}
-              style={styles.icon}
-            />
-          </Pressable>
+    <SafeAreaView style={styles.container}>
+      <Header label={'Home'} />
 
-          <View style={styles.headerTextView}>
-            <Text style={styles.headerText}>Contact</Text>
-          </View>
-        </View>
+      <ScrollView>
         <View style={styles.mainView}>
           <AdminDetail />
           <View style={styles.termsView}>
@@ -59,8 +47,8 @@ const Contact = ({navigation}) => {
           </View>
           <Faq />
         </View>
-      </SafeAreaView>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({

@@ -25,7 +25,7 @@ const Login = ({navigation}) => {
     <View style={styles.container}>
       <Header label={'Admin Login'} />
 
-      <ScrollView>
+      <ScrollView contentContainerStyle={{flex: 1}}>
         <View style={styles.mainForBody}>
           <View style={styles.mainImg}>
             <Image
@@ -79,7 +79,6 @@ const styles = StyleSheet.create({
   mainForBody: {
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'center',
     flex: 0.9,
   },
   logoImg: {
