@@ -18,63 +18,87 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-const Faq = () => {
+import Header from '../../components/modalHeader';
+
+const Faq = ({navigation}) => {
   const [faqQuestion1, setFaqQuestion1] = React.useState(false);
   const [faqQuestion2, setFaqQuestion2] = React.useState(false);
   const [faqQuestion3, setFaqQuestion3] = React.useState(false);
   return (
-    <View style={styles.termsView}>
-      <Text style={styles.termsMainText}>FAQ</Text>
-      <View style={styles.faqMain}>
-        <View style={styles.faqBody}>
-          <TouchableOpacity onPress={() => setFaqQuestion1(!faqQuestion1)}>
-            <Text style={styles.faqQuestion}>
-              Lorem ipsum dolor sit amet consectetur
-            </Text>
-          </TouchableOpacity>
-          {faqQuestion1 ? (
-            <Feather name="chevron-up" size={wp(6)} style={styles.DownIcons} />
-          ) : (
-            <Feather
-              name="chevron-down"
-              size={wp(6)}
-              style={styles.DownIcons}
-            />
-          )}
-        </View>
-        {faqQuestion1 ? (
-          <Text style={styles.faqAnswer}>
-            Lorem ipsum dolor sit amet dolor sit amet consectetur
-          </Text>
-        ) : null}
+    <SafeAreaView style={styles.container}>
+      <View>
+        <Header label={'Faq'} navigation={navigation} />
       </View>
-      <View style={styles.faqMain}>
-        <View style={styles.faqBody}>
-          <TouchableOpacity onPress={() => setFaqQuestion2(!faqQuestion2)}>
-            <Text style={styles.faqQuestion}>
-              Lorem ipsum dolor sit amet consectetur
-            </Text>
-          </TouchableOpacity>
-          {faqQuestion2 ? (
-            <Feather name="chevron-up" size={wp(6)} style={styles.DownIcons} />
-          ) : (
-            <Feather
-              name="chevron-down"
-              size={wp(6)}
-              style={styles.DownIcons}
-            />
-          )}
+      <View style={styles.mainView}>
+        <View style={styles.termsView}>
+          <Text style={styles.termsMainText}>FAQ</Text>
+          <View style={styles.faqMain}>
+            <View style={styles.faqBody}>
+              <TouchableOpacity onPress={() => setFaqQuestion1(!faqQuestion1)}>
+                <Text style={styles.faqQuestion}>
+                  Lorem ipsum dolor sit amet consectetur
+                </Text>
+              </TouchableOpacity>
+              {faqQuestion1 ? (
+                <Feather
+                  name="chevron-up"
+                  size={wp(6)}
+                  style={styles.DownIcons}
+                />
+              ) : (
+                <Feather
+                  name="chevron-down"
+                  size={wp(6)}
+                  style={styles.DownIcons}
+                />
+              )}
+            </View>
+            {faqQuestion1 ? (
+              <Text style={styles.faqAnswer}>
+                Lorem ipsum dolor sit amet dolor sit amet consectetur
+              </Text>
+            ) : null}
+          </View>
+          <View style={styles.faqMain}>
+            <View style={styles.faqBody}>
+              <TouchableOpacity onPress={() => setFaqQuestion2(!faqQuestion2)}>
+                <Text style={styles.faqQuestion}>
+                  Lorem ipsum dolor sit amet consectetur
+                </Text>
+              </TouchableOpacity>
+              {faqQuestion2 ? (
+                <Feather
+                  name="chevron-up"
+                  size={wp(6)}
+                  style={styles.DownIcons}
+                />
+              ) : (
+                <Feather
+                  name="chevron-down"
+                  size={wp(6)}
+                  style={styles.DownIcons}
+                />
+              )}
+            </View>
+            {faqQuestion2 ? (
+              <Text style={styles.faqAnswer}>
+                Lorem ipsum dolor sit amet dolor sit amet consectetur
+              </Text>
+            ) : null}
+          </View>
         </View>
-        {faqQuestion2 ? (
-          <Text style={styles.faqAnswer}>
-            Lorem ipsum dolor sit amet dolor sit amet consectetur
-          </Text>
-        ) : null}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  mainView: {
+    width: '90%',
+    alignSelf: 'center',
+  },
   termsView: {
     width: '100%',
     marginVertical: 15,

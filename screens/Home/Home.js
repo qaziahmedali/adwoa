@@ -9,10 +9,10 @@ import {
 } from 'react-native-responsive-screen';
 import {RFValue} from 'react-native-responsive-fontsize';
 import Header from '../../components/modalHeader';
-const Home = () => {
+const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Header label={'Home'} />
+      <Header label={'Home'} navigation={navigation} />
       <ScrollView>
         <View style={{width: '100%'}}>
           <View style={styles.mainForBody}>
@@ -29,7 +29,7 @@ const Home = () => {
                 <EvilIcons name="search" size={wp(8)} color={Colors.GREY} />
               </View>
             </View>
-            <HomeData />
+            <HomeData navigation={navigation} />
           </View>
         </View>
       </ScrollView>

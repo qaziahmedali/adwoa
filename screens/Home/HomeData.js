@@ -9,12 +9,14 @@ import {
 
 import {Button, Card, Title, Paragraph} from 'react-native-paper';
 const Home = ({navigation}) => {
-  const goDetailPage = () => {};
+  const goDetailPage = () => {
+    navigation.navigate('HomeDetail');
+  };
   return (
     <>
       <View style={styles.mainForCard}>
         <View style={styles.cardMain}>
-          <Pressable onPress={() => navigation.navigate('HomeDetail')}>
+          <Pressable onPress={goDetailPage}>
             <Card style={styles.card}>
               <Card.Cover
                 source={{

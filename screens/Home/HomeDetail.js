@@ -40,10 +40,10 @@ const HomeDetail = () => {
               voluptatum laborum numquam blanditiis harum quisquam eius sed odit
             </Text>
           </View>
-          <View style={styles.mainForOther}>
+          <View style={styles.mainForOtherBoxes}>
             <View style={styles.mainForBox}>
               <Text style={styles.ForBoxBody}>
-                <Entypo name="location-pin" />
+                {/* <Entypo name="location-pin" /> */}
                 Location
               </Text>
               <Text style={styles.ForBoxBodyValue}>
@@ -51,16 +51,19 @@ const HomeDetail = () => {
               </Text>
             </View>
             <View style={styles.mainForBox}>
-              <Text style={styles.ForBoxBody}>Location</Text>
-              <Text style={styles.ForBoxBodyValue}>
-                laborum numquam blanditiis
-              </Text>
+              <Text style={styles.ForBoxBody}>Category Name</Text>
+              <Text style={styles.ForBoxBodyValue}>Babies</Text>
             </View>
-            <View style={styles.mainForBox}>
-              <Text style={styles.ForBoxBody}>Location</Text>
-              <Text style={styles.ForBoxBodyValue}>
-                laborum numquam blanditiis
-              </Text>
+          </View>
+          <View style={styles.sellerDetails}>
+            <Image
+              source={require('../../assets/user.jpg')}
+              style={styles.DetailUserImg}
+              resizeMode="contain"
+            />
+            <View>
+              <Text style={styles.ForName}>John</Text>
+              <Text style={styles.ForMobile}>+925658753</Text>
             </View>
           </View>
         </View>
@@ -130,26 +133,47 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
     textAlign: 'justify',
   },
-  mainForOther: {
+  mainForOtherBoxes: {
     width: '100%',
     flexDirection: 'row',
   },
   mainForBox: {
-    width: '30%',
+    width: '49%',
     marginRight: 7,
     marginVertical: 35,
-    backgroundColor: Colors.GREENSHADE,
+    backgroundColor: Colors.WHITE,
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
     borderTopRightRadius: 10,
-    paddingVertical: 15,
-    paddingHorizontal: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
   },
   ForBoxBody: {
     fontWeight: 'bold',
     color: Colors.BLACK,
   },
   ForBoxBodyValue: {
+    color: Colors.BLACK,
+  },
+  DetailUserImg: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+  },
+  sellerDetails: {
+    borderRadius: 10,
+    padding: 10,
+    backgroundColor: Colors.WHITE,
+    flexDirection: 'row',
+  },
+  ForName: {
+    color: Colors.BLACK,
+    paddingTop: 5,
+    paddingHorizontal: 15,
+    fontWeight: '500',
+  },
+  ForMobile: {
+    paddingHorizontal: 15,
     color: Colors.BLACK,
   },
 });
