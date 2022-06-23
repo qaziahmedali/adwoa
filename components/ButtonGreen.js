@@ -3,7 +3,7 @@ import {View, Text, Pressable, StyleSheet} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {Colors} from './constants';
 
-const Button = ({label, navigation, onPress}) => {
+const ButtonGreen = ({label, navigation, onPress}) => {
   return (
     <View style={styles.MainResponsevieView}>
       <View style={styles.ResponsevieView}>
@@ -15,19 +15,18 @@ const Button = ({label, navigation, onPress}) => {
   );
 };
 
-export default Button;
+export default ButtonGreen;
 
 const styles = StyleSheet.create({
   btn: {
     width: '100%',
     height: 48,
     borderRadius: 12,
-    backgroundColor: Colors.RED,
+    backgroundColor: Colors.GREEN,
     elevation: 7,
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   Textcreate: {
     color: Colors.WHITE,
     fontSize: RFValue(14, 580),

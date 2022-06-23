@@ -1,34 +1,36 @@
 import React from 'react';
-import {Text, View, TextInput, StyleSheet} from 'react-native';
+import {Text, View, TextInput, StyleSheet, Pressable} from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Feather from 'react-native-vector-icons/Feather';
-import {Colors} from '../../components/constants';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
 import {Button, Card, Title, Paragraph} from 'react-native-paper';
-const Home = () => {
+const Home = ({navigation}) => {
+  const goDetailPage = () => {};
   return (
     <>
       <View style={styles.mainForCard}>
         <View style={styles.cardMain}>
-          <Card style={styles.card}>
-            <Card.Cover
-              source={{
-                uri: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg',
-              }}
-              style={styles.cardImg}
-            />
-            <View style={styles.cardBody}>
-              <Paragraph style={styles.cardParaTxt}>House for Sale</Paragraph>
-              <Paragraph>$497,346,000</Paragraph>
-              <View style={styles.cardDangerTxt}>
-                <Paragraph style={styles.cardEndTxt}>Real Estate</Paragraph>
+          <Pressable onPress={() => navigation.navigate('HomeDetail')}>
+            <Card style={styles.card}>
+              <Card.Cover
+                source={{
+                  uri: 'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg',
+                }}
+                style={styles.cardImg}
+              />
+              <View style={styles.cardBody}>
+                <Paragraph style={styles.cardParaTxt}>House for Sale</Paragraph>
+                <Paragraph>$497,346,000</Paragraph>
+                <View style={styles.cardDangerTxt}>
+                  <Paragraph style={styles.cardEndTxt}>Real Estate</Paragraph>
+                </View>
               </View>
-            </View>
-          </Card>
+            </Card>
+          </Pressable>
         </View>
         <View style={styles.cardMain}>
           <Card style={styles.card}>
