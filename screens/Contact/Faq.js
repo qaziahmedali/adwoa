@@ -4,30 +4,31 @@ import {
   Text,
   SafeAreaView,
   StyleSheet,
-  TextInput,
-  Pressable,
-  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 import {Colors} from '../../components/constants';
 import Feather from 'react-native-vector-icons/Feather';
 import {RFValue} from 'react-native-responsive-fontsize';
-import Entypo from 'react-native-vector-icons/Entypo';
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import Header from '../../components/modalHeader';
+import Header from '../../components/Header';
 
 const Faq = ({navigation}) => {
   const [faqQuestion1, setFaqQuestion1] = React.useState(false);
   const [faqQuestion2, setFaqQuestion2] = React.useState(false);
-  const [faqQuestion3, setFaqQuestion3] = React.useState(false);
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Header label={'Faq'} navigation={navigation} />
+        <Header
+          label={'Faq'}
+          navigation={navigation}
+          color={Colors.GREEN}
+          menuIcon={false}
+          align={'center'}
+        />
       </View>
       <View style={styles.mainView}>
         <View style={styles.termsView}>

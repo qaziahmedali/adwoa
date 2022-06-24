@@ -1,35 +1,81 @@
 import React, {useState} from 'react';
-import {Text, View, TextInput, StyleSheet, ScrollView} from 'react-native';
+import {View, TextInput, StyleSheet, ScrollView} from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {Colors} from '../../components/constants';
-import HomeData from './HomeData';
+import Products from './Products';
+import Category from './category';
+import {products, categories} from './Data';
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import {RFValue} from 'react-native-responsive-fontsize';
-import Header from '../../components/modalHeader';
+import Header from '../../components/Header';
 const Home = ({navigation}) => {
+  const [productsFilterData, setproductsFilterData] = useState([]);
+  const [selectedId, setSelectedId] = useState();
+
+  const onClickCategory = cid => {
+    setSelectedId(cid);
+    console.log(cid);
+    const newProduct = [...products];
+    const newCategory = [...categories];
+
+    let newMergeProduct = newProduct.map((item, index) => {
+      newCategory.forEach(item2 => {
+        if (item.id === cid) {
+          item = Object.assign(item, item2);
+        }
+      });
+      return item;
+    });
+    console.log('newMergeProduct', newMergeProduct);
+    const newFilterProducts = newMergeProduct.filter(
+      item => item.categoryId == cid,
+    );
+    console.log('newFilterProducts', newFilterProducts);
+    setproductsFilterData(newFilterProducts);
+  };
+
   return (
     <View style={styles.container}>
-      <Header label={'Home'} navigation={navigation} />
+      <Header
+        label={'Home'}
+        navigation={navigation}
+        color={Colors.GREEN}
+        menuIcon={true}
+        align={'center'}
+      />
       <ScrollView>
-        <View style={{width: '100%'}}>
-          <View style={styles.mainForBody}>
-            <View style={styles.mainForSearchBar}>
-              <View style={styles.inputView}>
-                <TextInput
-                  placeholder="search posts"
-                  placeholderTextColor={Colors.GREY}
-                  color={Colors.GREY}
-                  style={styles.inputsearch}
-                />
-              </View>
-              <View style={styles.iconView}>
-                <EvilIcons name="search" size={wp(8)} color={Colors.GREY} />
-              </View>
+        <View style={styles.mainForBody}>
+          <View style={styles.mainForSearchBar}>
+            <View style={styles.inputView}>
+              <TextInput
+                placeholder="search posts"
+                placeholderTextColor={Colors.GREY}
+                color={Colors.BLACK}
+                style={styles.inputsearch}
+              />
             </View>
-            <HomeData navigation={navigation} />
+            <View style={styles.iconView}>
+              <EvilIcons name="search" size={wp(8)} color={Colors.GREY} />
+            </View>
+          </View>
+          <View style={{width: '100%'}}>
+            <Category
+              navigation={navigation}
+              categories={categories}
+              onClickCategory={onClickCategory}
+              selectedId={selectedId}
+            />
+          </View>
+          <View style={{width: '100%'}}>
+            <Products
+              navigation={navigation}
+              products={
+                productsFilterData.length > 0 ? productsFilterData : products
+              }
+            />
           </View>
         </View>
       </ScrollView>
@@ -66,45 +112,6 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     alignItems: 'flex-start',
-    // marginTop: ,
-  },
-  modalView: {
-    height: '100%',
-    width: '70%',
-    backgroundColor: 'white',
-    borderBottomRightRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomLeftRadius: 10,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 10,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    color: 'red',
-    marginBottom: 15,
-    textAlign: 'center',
   },
 });
 export default Home;

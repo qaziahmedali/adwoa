@@ -20,8 +20,18 @@ const Menu = ({navigation}) => {
         />
       </View>
       <View style={styles.footer}>
-        <Button navigation={navigation} label={'Register'} onPress={Register} />
-        <Button navigation={navigation} label={'Login'} onPress={Login} />
+        <Button
+          navigation={navigation}
+          label={'Register'}
+          onPress={Register}
+          color={Colors.RED}
+        />
+        <Button
+          navigation={navigation}
+          label={'Login'}
+          onPress={Login}
+          color={Colors.RED}
+        />
       </View>
     </View>
   );

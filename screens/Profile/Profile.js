@@ -5,30 +5,19 @@ import {
   TextInput,
   StyleSheet,
   Image,
-  TouchableOpacity,
   Pressable,
+  ScrollView,
 } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
 import {Colors} from '../../components/constants';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import {RFValue} from 'react-native-responsive-fontsize';
 import ImagePicker from 'react-native-image-crop-picker';
+import Header from '../../components/Header';
 
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-import ButtonGreen from '../../components/ButtonGreen';
 import Button from '../../components/Button';
-
-// import {RFValue} from 'react-native-responsive-fontsize';
 
 const AddProduct = ({navigation}) => {
   const [image, setImage] = useState('');
 
-  const GoBack = () => {
-    navigation.goBack();
-  };
   const handleChoosePhoto = () => {
     ImagePicker.openPicker({
       width: 300,
@@ -46,18 +35,13 @@ const AddProduct = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.mainForHeader}>
-        <AntDesign
-          name="arrowleft"
-          size={wp(6)}
-          color={Colors.WHITE}
-          style={styles.icon}
-          onPress={GoBack}
-        />
-        <View style={styles.headerTextView}>
-          <Text style={styles.headerText}>Edit Profile</Text>
-        </View>
-      </View>
+      <Header
+        label={'Profile'}
+        navigation={navigation}
+        color={Colors.GREEN}
+        menuIcon={false}
+        align={'center'}
+      />
       <ScrollView>
         <View style={styles.mainBodyView}>
           <View style={styles.profilePic}>
@@ -67,15 +51,10 @@ const AddProduct = ({navigation}) => {
               }}>
               {image === '' ? (
                 <Image
-                  style={{
-                    width: 80,
-                    height: 80,
-                    borderRadius: 200 / 2,
-                    overflow: 'hidden',
-                    borderWidth: 1,
-                    borderColor: 'grey',
+                  style={styles.imagestyle}
+                  source={{
+                    uri: image,
                   }}
-                  source={image.Profile}
                 />
               ) : (
                 <Image
@@ -122,10 +101,20 @@ const AddProduct = ({navigation}) => {
               style={styles.inputs}
             />
           </View>
+          <View style={{width: '100%'}}>
+            <Button
+              label={'Update Account Information'}
+              onPress={console.log('account is deleted')}
+              color={Colors.GREEN}
+            />
+            <Button
+              label={'Delete Account Forever'}
+              color={Colors.RED}
+              onPress={() => console.log('account is deleted')}
+            />
+          </View>
         </View>
       </ScrollView>
-      <ButtonGreen label={'Update Account Information'} />
-      <Button label={'Delete Account Forever'} />
     </View>
   );
 };
@@ -133,7 +122,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    alignItems: 'center',
   },
   mainForHeader: {
     width: '100%',
@@ -171,6 +159,8 @@ const styles = StyleSheet.create({
     width: 130,
     height: 130,
     borderRadius: 100,
+    borderWidth: 1,
+    borderColor: Colors.GREY,
   },
   UserImg: {
     width: 140,

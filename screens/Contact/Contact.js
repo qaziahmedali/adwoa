@@ -9,13 +9,11 @@ import {
 } from 'react-native';
 import {Colors} from '../../components/constants';
 import Feather from 'react-native-vector-icons/Feather';
-import Faq from './Faq';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import AdminDetail from './adminDetail';
-import Header from '../../components/modalHeader';
+import Header from '../../components/Header';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -25,7 +23,13 @@ const Contact = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View>
-        <Header label={'Contact Us'} navigation={navigation} />
+        <Header
+          label={'Contact Us'}
+          navigation={navigation}
+          color={Colors.GREEN}
+          menuIcon={true}
+          align={'center'}
+        />
       </View>
 
       <View style={styles.mainView}>

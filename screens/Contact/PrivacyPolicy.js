@@ -1,27 +1,19 @@
 import {RFValue} from 'react-native-responsive-fontsize';
 import * as React from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-} from 'react-native';
+import {View, Text, SafeAreaView, StyleSheet, ScrollView} from 'react-native';
 import {Colors} from '../../components/constants';
-import Feather from 'react-native-vector-icons/Feather';
-import Faq from './Faq';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-import AdminDetail from './adminDetail';
-import Header from '../../components/modalHeader';
+import Header from '../../components/Header';
 const Contact = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Header label={'Privacy Policy'} navigation={navigation} />
+        <Header
+          label={'Privacy Policy'}
+          navigation={navigation}
+          color={Colors.GREEN}
+          menuIcon={false}
+          align={'center'}
+        />
       </View>
       <ScrollView>
         <View style={styles.mainView}>
@@ -43,22 +35,6 @@ const Contact = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  mainForHeader: {
-    width: '100%',
-    backgroundColor: Colors.GREEN,
-    flexDirection: 'row',
-  },
-  headerIconView: {
-    width: '20%',
-  },
-  headerTextView: {
-    width: '80%',
-  },
-  headerText: {
-    color: Colors.WHITE,
-    paddingVertical: 13,
-    textAlign: 'center',
   },
 
   mainView: {

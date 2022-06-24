@@ -9,7 +9,9 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-const HomeDetail = () => {
+const HomeDetail = props => {
+  console.log(props);
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -22,7 +24,7 @@ const HomeDetail = () => {
         </View>
         <View style={styles.mainForBody}>
           <View style={styles.mainTextView}>
-            <Text style={styles.mainText}>Houe for Sale</Text>
+            <Text style={styles.mainText}>HOUSE FOR SALE</Text>
           </View>
           <View style={styles.mainPriceView}>
             <View style={styles.reviewView}>

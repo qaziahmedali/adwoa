@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 import {Colors} from '../../components/constants';
 import Button from '../../components/Button';
+import Header from '../../components/Header';
 
-import Header from './header';
 // import {RFValue} from 'react-native-responsive-fontsize';
 
 const Login = ({navigation}) => {
@@ -23,9 +23,15 @@ const Login = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
-      <Header label={'Admin Login'} />
+      <Header
+        label={'Admin Login'}
+        navigation={navigation}
+        color={Colors.RED}
+        menuIcon={false}
+        align={'center'}
+      />
 
-      <ScrollView contentContainerStyle={{flex: 1}}>
+      <ScrollView>
         <View style={styles.mainForBody}>
           <View style={styles.mainImg}>
             <Image
@@ -64,6 +70,7 @@ const Login = ({navigation}) => {
           <Button
             navigation={navigation}
             label={'Login'}
+            color={Colors.RED}
             onPress={handleData}
           />
         </View>

@@ -63,6 +63,7 @@ const NewPassword = ({navigation}) => {
               navigation={navigation}
               label={'Send'}
               onPress={EnterNewPassword}
+              color={Colors.RED}
             />
           </View>
         </View>

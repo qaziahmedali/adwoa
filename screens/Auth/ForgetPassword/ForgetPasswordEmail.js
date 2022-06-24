@@ -58,6 +58,7 @@ const ForgetPasswordEmail = ({navigation}) => {
             <Button
               navigation={navigation}
               label={'Send'}
+              color={Colors.RED}
               onPress={verificationCode}
             />
           </View>

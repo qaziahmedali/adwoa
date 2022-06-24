@@ -85,6 +85,7 @@ const VerifictaionCode = ({navigation}) => {
               navigation={navigation}
               label={'Next'}
               onPress={EnterVerificationCode}
+              color={Colors.RED}
             />
           </View>
         </View>

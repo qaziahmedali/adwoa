@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 import {Colors} from '../../components/constants';
 import Button from '../../components/Button';
-import Header from './header';
 import {RFValue} from 'react-native-responsive-fontsize';
+import Header from '../../components/Header';
 
 const Register = ({navigation}) => {
   const handleData = () => {
@@ -22,7 +22,13 @@ const Register = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
-      <Header label={'Admin Register'} />
+      <Header
+        label={'Admin Register'}
+        navigation={navigation}
+        color={Colors.RED}
+        menuIcon={false}
+        align={'center'}
+      />
 
       <ScrollView>
         <View style={styles.mainForBody}>
@@ -72,6 +78,7 @@ const Register = ({navigation}) => {
             navigation={navigation}
             label={'Register'}
             onPress={handleData}
+            color={Colors.RED}
           />
         </View>
       </ScrollView>
