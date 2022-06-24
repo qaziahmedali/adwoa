@@ -1,4 +1,3 @@
-import {RFValue} from 'react-native-responsive-fontsize';
 import * as React from 'react';
 import {
   View,
@@ -17,110 +16,80 @@ import {
 } from 'react-native-responsive-screen';
 import AdminDetail from './adminDetail';
 import Header from '../../components/modalHeader';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {RFValue} from 'react-native-responsive-fontsize';
+
 const Contact = ({navigation}) => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Header label={'Home'} />
+    <View style={styles.container}>
+      <View>
+        <Header label={'Contact Us'} navigation={navigation} />
+      </View>
 
-      <ScrollView>
-        <View style={styles.mainView}>
-          <AdminDetail />
-          <View style={styles.termsView}>
-            <Text style={styles.termsMainText}>Terms and Condition</Text>
-            <Text style={styles.termsParaText}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-              mollitia, molestiae quas vel sint commodi repudiandae consequuntur
-              voluptatum laborum numquam blanditiis harum quisquam eius sed odit
-              fugiat iusto fuga praesentium optio, eaque rerum! Provident
-              similique accusantium nemo autem.
-            </Text>
-          </View>
-          <View style={styles.termsView}>
-            <Text style={styles.termsMainText}>Privacy Policy</Text>
-            <Text style={styles.termsParaText}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-              mollitia, molestiae quas vel sint commodi repudiandae consequuntur
-              voluptatum laborum numquam blanditiis harum quisquam eius sed odit
-              fugiat iusto fuga praesentium optio, eaque rerum! Provident
-              similique accusantium nemo autem.
-            </Text>
-          </View>
-          <Faq />
+      <View style={styles.mainView}>
+        <View style={styles.TextView}>
+          <Ionicons name="person-add" size={wp(6)} style={styles.icons} />
+          <Text style={styles.TextKey}>Business Name:</Text>
+          <Text style={styles.TextValue}>Adwoa</Text>
         </View>
-      </ScrollView>
-    </SafeAreaView>
+        <View style={styles.TextView}>
+          <Entypo name="mail" size={wp(6)} style={styles.icons} />
+          <Text style={styles.TextKey}>Email:</Text>
+          <Text style={styles.TextValue}>ahmed@gmail.com</Text>
+        </View>
+        <View style={styles.TextView}>
+          <Ionicons name="location" size={wp(6)} style={styles.icons} />
+          <Text style={styles.TextKey}>Address:</Text>
+          <Text style={styles.TextValue}>here</Text>
+        </View>
+        <View style={styles.TextView}>
+          <FontAwesome name="phone" size={wp(6)} style={styles.icons} />
+          <Text style={styles.TextKey}>Phone:</Text>
+          <Text style={styles.TextValue}>+925757865</Text>
+        </View>
+      </View>
+    </View>
   );
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  mainForHeader: {
-    width: '100%',
-    backgroundColor: Colors.GREEN,
-    flexDirection: 'row',
-  },
-  headerIconView: {
-    width: '20%',
-  },
-  headerTextView: {
-    width: '80%',
-  },
-  headerText: {
-    color: Colors.WHITE,
-    paddingVertical: 13,
-    textAlign: 'center',
-  },
 
   mainView: {
     width: '90%',
     alignSelf: 'center',
-    alignItems: 'center',
-    flex: 0.9,
-    marginTop: 20,
   },
-  mainTextView: {
+  TextView: {
     width: '100%',
     alignItems: 'flex-start',
+    // marginVertical: 2,
+    // borderBottomWidth: 1,
+    borderColor: Colors.GREY,
+    borderRadius: 10,
+    flexDirection: 'row',
+    paddingVertical: 10,
   },
-  mainText: {
-    fontWeight: '600',
-    fontSize: RFValue(33, 700),
-    color: Colors.BLACK,
-  },
-  mainParaText: {
+  TextKey: {
+    fontSize: RFValue(15, 700),
     color: Colors.GREY,
+    fontWeight: 'bold',
   },
-  icon: {
-    padding: 13,
-  },
-  termsView: {
-    width: '100%',
-    marginVertical: 10,
-  },
-  termsMainText: {
+  TextValue: {
+    fontSize: RFValue(15, 700),
     color: Colors.BLACK,
-    fontWeight: '500',
-    fontSize: RFValue(23, 700),
-    alignItems: 'flex-start',
+    paddingHorizontal: 10,
+    // fontWeight: 'bold',
   },
-  termsParaText: {
-    backgroundColor: '#EDE8E9',
-    // backgroundColor: Colors.GREENSHADE,
+  icons: {
     color: Colors.BLACK,
-    textAlign: 'justify',
-    padding: 15,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-    borderTopRightRadius: 10,
+    paddingRight: 10,
   },
-
-  DotsIcons: {
-    color: Colors.BLACK,
-    paddingTop: 17,
-  },
-  DotsIconsTerms: {
-    color: Colors.BLACK,
+  termsText: {
+    color: Colors.GREY,
+    paddingRight: 35,
   },
 });
 export default Contact;

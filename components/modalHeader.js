@@ -22,7 +22,16 @@ import {RFValue} from 'react-native-responsive-fontsize';
 const Header = ({navigation, label}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const handleData = () => {
-    navigation.navigate('Login');
+    navigation.navigate('Contact');
+  };
+  const handleTerms = () => {
+    navigation.navigate('Terms');
+  };
+  const handlePolicy = () => {
+    navigation.navigate('PrivacyPolicy');
+  };
+  const handleFaqs = () => {
+    navigation.navigate('Faq');
   };
   return (
     <>
@@ -113,7 +122,9 @@ const Header = ({navigation, label}) => {
                     />
                   </View>
                   <View style={{width: '80%'}}>
-                    <Text style={styles.MenuText}>Privacy Policy</Text>
+                    <Text style={styles.MenuText} onPress={handlePolicy}>
+                      Privacy Policy
+                    </Text>
                   </View>
                 </View>
                 {/*Menus start*/}
@@ -127,7 +138,9 @@ const Header = ({navigation, label}) => {
                     />
                   </View>
                   <View style={{width: '80%'}}>
-                    <Text style={styles.MenuText}>Terms & Conditions</Text>
+                    <Text style={styles.MenuText} onPress={handleTerms}>
+                      Terms & Conditions
+                    </Text>
                   </View>
                 </View>
                 {/*Menus start*/}
@@ -142,7 +155,8 @@ const Header = ({navigation, label}) => {
                   </View>
                   <View style={{width: '80%'}}>
                     <Text
-                      style={{color: Colors.BLACK, fontSize: RFValue(14, 580)}}>
+                      style={{color: Colors.BLACK, fontSize: RFValue(14, 580)}}
+                      onPress={handleFaqs}>
                       FAQ's
                     </Text>
                   </View>

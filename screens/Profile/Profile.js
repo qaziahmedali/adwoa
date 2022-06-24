@@ -58,71 +58,72 @@ const AddProduct = ({navigation}) => {
           <Text style={styles.headerText}>Edit Profile</Text>
         </View>
       </View>
-
-      <View style={styles.mainBodyView}>
-        <View style={styles.profilePic}>
-          <Pressable
-            onPress={() => {
-              handleChoosePhoto();
-            }}>
-            {image === '' ? (
-              <Image
-                style={{
-                  width: 80,
-                  height: 80,
-                  borderRadius: 200 / 2,
-                  overflow: 'hidden',
-                  borderWidth: 1,
-                  borderColor: 'grey',
-                }}
-                source={image.Profile}
-              />
-            ) : (
-              <Image
-                style={styles.imagestyle}
-                source={{
-                  uri: image,
-                }}
-              />
-            )}
-          </Pressable>
-          <Text style={styles.aboutText}>
-            Click on the image above to update your profile pic
-          </Text>
+      <ScrollView>
+        <View style={styles.mainBodyView}>
+          <View style={styles.profilePic}>
+            <Pressable
+              onPress={() => {
+                handleChoosePhoto();
+              }}>
+              {image === '' ? (
+                <Image
+                  style={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: 200 / 2,
+                    overflow: 'hidden',
+                    borderWidth: 1,
+                    borderColor: 'grey',
+                  }}
+                  source={image.Profile}
+                />
+              ) : (
+                <Image
+                  style={styles.imagestyle}
+                  source={{
+                    uri: image,
+                  }}
+                />
+              )}
+            </Pressable>
+            <Text style={styles.aboutText}>
+              Click on the image above to update your profile pic
+            </Text>
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              placeholder="Name"
+              placeholderTextColor={Colors.GREY}
+              color={Colors.GREY}
+              style={styles.inputs}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              placeholder="Phone"
+              placeholderTextColor={Colors.GREY}
+              color={Colors.GREY}
+              style={styles.inputs}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              placeholder="New Password(optional)"
+              placeholderTextColor={Colors.GREY}
+              color={Colors.GREY}
+              style={styles.inputs}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              placeholder="Confirm Password(optional)"
+              placeholderTextColor={Colors.GREY}
+              color={Colors.GREY}
+              style={styles.inputs}
+            />
+          </View>
         </View>
-        <View style={styles.inputView}>
-          <TextInput
-            placeholder="Name"
-            placeholderTextColor={Colors.GREY}
-            color={Colors.GREY}
-            style={styles.inputs}
-          />
-        </View>
-        <View style={styles.inputView}>
-          <TextInput
-            placeholder="Phone"
-            placeholderTextColor={Colors.GREY}
-            color={Colors.GREY}
-            style={styles.inputs}
-          />
-        </View>
-        <View style={styles.inputView}>
-          <TextInput
-            placeholder="New Password(optional)"
-            placeholderTextColor={Colors.GREY}
-            color={Colors.GREY}
-            style={styles.inputs}
-          />
-        </View>
-        <View style={styles.inputView}>
-          <TextInput
-            placeholder="Confirm Password(optional)"
-            placeholderTextColor={Colors.GREY}
-            color={Colors.GREY}
-            style={styles.inputs}
-          />
-        </View>
-      </View>
+      </ScrollView>
       <ButtonGreen label={'Update Account Information'} />
       <Button label={'Delete Account Forever'} />
     </View>

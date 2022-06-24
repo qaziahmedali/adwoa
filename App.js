@@ -13,13 +13,15 @@ import ChatBodyHeader from './screens/Chat/ChatBodyHeader';
 import HomeDetail from './screens/Home/HomeDetail';
 import Drawers from './components/Drawers';
 import Faq from './screens/Contact/Faq';
+import Terms from './screens/Contact/terms';
+import PrivacyPolicy from './screens/Contact/PrivacyPolicy';
 const Stack = createStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="Menu"
           component={Menu}
           options={{headerShown: false}}
@@ -48,23 +50,13 @@ function App() {
           name="NewPassword"
           component={NewPassword}
           options={{headerShown: false}}
-        /> */}
-
-        {/* <Stack.Screen
-          name="Drawer"
-          component={Drawers}
-          options={{headerShown: false}}
-        /> */}
-        <Stack.Screen
-          name="HomeDetail"
-          component={HomeDetail}
-          options={{headerShown: false}}
         />
         <Stack.Screen
           name="BottomTabbe"
           component={BottomTabbe}
           options={{headerShown: false}}
         />
+
         <Stack.Screen
           name="Contact"
           component={Contact}
@@ -79,6 +71,21 @@ function App() {
         <Stack.Screen
           name="Faq"
           component={Faq}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Terms"
+          component={Terms}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="PrivacyPolicy"
+          component={PrivacyPolicy}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="HomeDetail"
+          component={HomeDetail}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
