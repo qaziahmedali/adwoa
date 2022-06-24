@@ -31,58 +31,56 @@ const AddProduct = ({navigation}) => {
           <Text style={styles.headerText}>Add a new Product</Text>
         </View>
       </View>
-      <ScrollView>
-        <View style={styles.mainBodyView}>
-          <View style={styles.inputView}>
-            <TextInput
-              placeholder="Item Name"
-              placeholderTextColor={Colors.GREY}
-              color={Colors.GREY}
-              style={styles.inputs}
-            />
-          </View>
-          <View style={styles.inputView}>
-            <TextInput
-              placeholder="Item Description"
-              placeholderTextColor={Colors.GREY}
-              color={Colors.GREY}
-              style={styles.inputs}
-            />
-          </View>
-          <View style={styles.inputView}>
-            <TextInput
-              placeholder="Location"
-              placeholderTextColor={Colors.GREY}
-              color={Colors.GREY}
-              style={styles.inputs}
-            />
-          </View>
-          <View style={styles.inputView}>
-            <TextInput
-              placeholder="Item Price"
-              placeholderTextColor={Colors.GREY}
-              color={Colors.GREY}
-              style={styles.inputs}
-            />
-          </View>
-          <View style={styles.SelectView}>
-            <RNPickerSelect
-              onValueChange={value => console.log(value)}
-              items={[
-                {label: 'Jobs', value: 'Jobs'},
-                {label: 'Services', value: 'Services'},
-                {label: 'Vehicles', value: 'Vehicles'},
-                {label: 'Property', value: 'Property'},
-                {label: 'Home Furniture', value: 'Home Furniture'},
-                {label: 'Sports', value: 'Sports'},
-                {label: 'Babies', value: 'Babies'},
-              ]}
-              style={pickerSelectStyles}
-            />
-          </View>
-          <UploadImage />
+      <View style={styles.mainBodyView}>
+        <View style={styles.inputView}>
+          <TextInput
+            placeholder="Item Name"
+            placeholderTextColor={Colors.GREY}
+            color={Colors.GREY}
+            style={styles.inputs}
+          />
         </View>
-      </ScrollView>
+        <View style={styles.inputView}>
+          <TextInput
+            placeholder="Item Description"
+            placeholderTextColor={Colors.GREY}
+            color={Colors.GREY}
+            style={styles.inputs}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            placeholder="Location"
+            placeholderTextColor={Colors.GREY}
+            color={Colors.GREY}
+            style={styles.inputs}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            placeholder="Item Price"
+            placeholderTextColor={Colors.GREY}
+            color={Colors.GREY}
+            style={styles.inputs}
+          />
+        </View>
+        <View style={styles.SelectView}>
+          <RNPickerSelect
+            onValueChange={value => console.log(value)}
+            items={[
+              {label: 'Jobs', value: 'Jobs'},
+              {label: 'Services', value: 'Services'},
+              {label: 'Vehicles', value: 'Vehicles'},
+              {label: 'Property', value: 'Property'},
+              {label: 'Home Furniture', value: 'Home Furniture'},
+              {label: 'Sports', value: 'Sports'},
+              {label: 'Babies', value: 'Babies'},
+            ]}
+            style={pickerSelectStyles}
+          />
+        </View>
+        <UploadImage />
+      </View>
       <Button label={'Publish Item Now'} />
     </View>
   );
