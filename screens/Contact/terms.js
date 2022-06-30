@@ -11,7 +11,7 @@ import {
 import {Colors} from '../../components/constants';
 
 import Header from '../../components/Header';
-const Contact = ({navigation}) => {
+const Terms = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -96,4 +96,4 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
   },
 });
-export default Contact;
+export default Terms;

@@ -5,14 +5,13 @@ import {
   TextInput,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
   Modal,
   Pressable,
 } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import {Colors} from '../../components/constants';
 import {RFValue} from 'react-native-responsive-fontsize';
-import UploadImage from './uploadImage';
+import UploadImage from './UploadImage';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -20,15 +19,12 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-// import {RFValue} from 'react-native-responsive-fontsize';
 
 const AddProduct = ({navigation}) => {
-  const GoBack = () => {
-    navigation.goBack();
-  };
   const [showModal, setShowModal] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-
+  const handlePublishItem = () => {
+    console.log('account is published');
+  };
   return (
     <View style={styles.container}>
       <Header
@@ -48,14 +44,7 @@ const AddProduct = ({navigation}) => {
               style={styles.inputs}
             />
           </View>
-          <View style={styles.inputView}>
-            <TextInput
-              placeholder="Item Description"
-              placeholderTextColor={Colors.GREY}
-              color={Colors.GREY}
-              style={styles.inputs}
-            />
-          </View>
+
           <View style={styles.inputView}>
             <TextInput
               placeholder="Location"
@@ -70,6 +59,16 @@ const AddProduct = ({navigation}) => {
               placeholderTextColor={Colors.GREY}
               color={Colors.GREY}
               style={styles.inputs}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              multiline={true}
+              numberOfLines={4}
+              placeholder="Item Description"
+              placeholderTextColor={Colors.GREY}
+              color={Colors.GREY}
+              style={styles.DesInput}
             />
           </View>
           <View style={styles.SelectView}>
@@ -87,13 +86,19 @@ const AddProduct = ({navigation}) => {
               style={pickerSelectStyles}
             />
           </View>
-          <View style={styles.subscription}>
+          <View style={styles.subscriptionView}>
             <Pressable onPress={() => setShowModal(!showModal)}>
-              <Text style={styles.modalTrue}>Choose Subscription Plan</Text>
+              <Text style={styles.subscriptionText}>
+                Choose Subscription Plan
+              </Text>
             </Pressable>
           </View>
           <UploadImage />
-          <Button label={'Publish Item Now'} color={Colors.RED} />
+          <Button
+            label={'Publish Item Now'}
+            color={Colors.RED}
+            onPress={handlePublishItem}
+          />
         </View>
       </ScrollView>
       <Modal
@@ -107,7 +112,7 @@ const AddProduct = ({navigation}) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable onPress={() => setShowModal(!showModal)}>
-              <Icon name="chevron-up" size={wp(8)} color="black" />
+              <Icon name="chevron-down" size={wp(8)} color="black" />
             </Pressable>
             <View style={styles.mainBodyForModal}>
               <View style={styles.modalFirst}>
@@ -146,7 +151,7 @@ const AddProduct = ({navigation}) => {
                   <Text style={styles.keyTextDull}>Image and Video</Text>
                 </View>
                 <View style={styles.ValueView}>
-                  <Text style={styles.ValueText}>$15 </Text>
+                  <Text style={styles.ValueText}>$25 </Text>
                   <Text style={styles.keyTextDull}>1 month</Text>
                 </View>
               </View>
@@ -162,28 +167,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
   },
-  // header
-  mainForHeader: {
-    width: '100%',
-    backgroundColor: Colors.GREEN,
-    flexDirection: 'row',
-  },
-  headerIconView: {
-    width: '20%',
-  },
-  headerTextView: {
-    width: '80%',
-  },
-  headerText: {
-    color: Colors.WHITE,
-    paddingVertical: 13,
-    alignSelf: 'flex-start',
-    fontWeight: '600',
-    fontSize: RFValue(17, 700),
-  },
-  icon: {
-    padding: 13,
-  },
+
   // body
   mainBodyView: {
     width: '93%',
@@ -192,6 +176,11 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   inputs: {
+    paddingHorizontal: 10,
+    color: Colors.BLACK,
+  },
+  DesInput: {
+    textAlignVertical: 'top',
     paddingHorizontal: 10,
     color: Colors.BLACK,
   },
@@ -209,14 +198,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginVertical: 7,
   },
-  subscription: {
+  subscriptionView: {
     width: '100%',
     alignItems: 'flex-end',
   },
-  modalTrue: {
+  subscriptionText: {
     color: Colors.GREEN,
     marginVertical: 7,
   },
+  // modal
   centeredView: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -282,12 +272,11 @@ const styles = StyleSheet.create({
     width: '45%',
   },
   keyText: {
-    color: Colors.BLACK,
+    color: Colors.WHITE,
     fontWeight: '800',
     fontSize: RFValue(15, 700),
   },
   keyTextDull: {
-    // color: Colors.GREY,
     fontSize: RFValue(10, 700),
   },
   ValueView: {
@@ -298,7 +287,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   ValueText: {
-    color: Colors.BLACK,
+    color: Colors.WHITE,
     fontWeight: '800',
     fontSize: RFValue(15, 700),
   },

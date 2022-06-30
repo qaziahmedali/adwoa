@@ -15,7 +15,7 @@ import Header from '../../components/Header';
 
 import Button from '../../components/Button';
 
-const AddProduct = ({navigation}) => {
+const Profile = ({navigation}) => {
   const [image, setImage] = useState('');
 
   const handleChoosePhoto = () => {
@@ -43,6 +43,7 @@ const AddProduct = ({navigation}) => {
         align={'center'}
       />
       <ScrollView>
+        {/* upload image */}
         <View style={styles.mainBodyView}>
           <View style={styles.profilePic}>
             <Pressable
@@ -52,9 +53,7 @@ const AddProduct = ({navigation}) => {
               {image === '' ? (
                 <Image
                   style={styles.imagestyle}
-                  source={{
-                    uri: image,
-                  }}
+                  source={require('../../assets/avatar.jpeg')}
                 />
               ) : (
                 <Image
@@ -69,6 +68,7 @@ const AddProduct = ({navigation}) => {
               Click on the image above to update your profile pic
             </Text>
           </View>
+          {/* profile inputs */}
           <View style={styles.inputView}>
             <TextInput
               placeholder="Name"
@@ -101,11 +101,12 @@ const AddProduct = ({navigation}) => {
               style={styles.inputs}
             />
           </View>
+          {/* profile buttons */}
           <View style={{width: '100%'}}>
             <Button
               label={'Update Account Information'}
-              onPress={console.log('account is deleted')}
               color={Colors.GREEN}
+              onPress={() => console.log('account is updated')}
             />
             <Button
               label={'Delete Account Forever'}
@@ -191,4 +192,4 @@ const styles = StyleSheet.create({
     marginVertical: 7,
   },
 });
-export default AddProduct;
+export default Profile;

@@ -12,7 +12,7 @@ import {
 const Tab = createBottomTabNavigator();
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Home from './Home/Home';
-import Profile from './Profile/Profile';
+import Profile from './Profile/ProfileMenu';
 import Chat from './Chat/Chat';
 import AddProduct from './Add product/AddProduct';
 

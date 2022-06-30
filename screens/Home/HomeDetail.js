@@ -2,12 +2,6 @@ import React from 'react';
 import {ScrollView, Text, View, Image, StyleSheet} from 'react-native';
 import {Colors} from '../../components/constants';
 import {RFValue} from 'react-native-responsive-fontsize';
-import Entypo from 'react-native-vector-icons/Entypo';
-
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
 
 const HomeDetail = props => {
   console.log(props);

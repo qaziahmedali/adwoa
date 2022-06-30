@@ -1,17 +1,11 @@
 import React from 'react';
-import {
-  ScrollView,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-  TextInput,
-  Text,
-} from 'react-native';
+import {ScrollView, View, StyleSheet, Text} from 'react-native';
 import {Colors} from '../../../components/constants';
 import Button from '../../../components/Button';
 import {RFValue} from 'react-native-responsive-fontsize';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {baseUrl} from '../../../Config/BaseUrl';
 import {
   CodeField,
   Cursor,
@@ -22,20 +16,39 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-const VerifictaionCode = ({navigation}) => {
-  const EnterVerificationCode = () => {
+const VerifictaionCode = ({navigation, label}) => {
+  const CELL_COUNT = 4;
+  const [value, setValue] = React.useState('');
+  const ref = useBlurOnFulfill({code, cellCount: CELL_COUNT});
+  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+    value,
+    setValue,
+  });
+  // fetching api
+  AsyncStorage.getItem('email');
+  const EnterVerificationCode = async () => {
+    await fetch(`${baseUrl}/code-verify`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        value,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
     navigation.navigate('NewPassword');
   };
   const GoBack = () => {
     navigation.goBack();
   };
-  const CELL_COUNT = 4;
-  const [value, setValue] = React.useState('');
-  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
-  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
-    value,
-    setValue,
-  });
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -50,7 +63,7 @@ const VerifictaionCode = ({navigation}) => {
             />
           </View>
           <View style={styles.ForgetTextView}>
-            <Text style={styles.ForgetText}>Forget Password</Text>
+            <Text style={styles.ForgetText}>{label}</Text>
           </View>
           <View style={styles.ParaTextView}>
             <Text style={styles.ParaText}>

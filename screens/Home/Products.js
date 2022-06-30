@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Pressable, ScrollView} from 'react-native';
-import ProductData from './Data';
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import {View, StyleSheet, Pressable} from 'react-native';
 import {Card, Paragraph} from 'react-native-paper';
 
 const Products = ({navigation, products}) => {
@@ -14,8 +12,8 @@ const Products = ({navigation, products}) => {
   return (
     <View style={{width: '100%'}}>
       <View style={styles.mainForCard}>
-        {products.map(item => (
-          <View style={styles.cardMain}>
+        {products.map((item, i) => (
+          <View key={i} style={styles.cardMain}>
             <Pressable onPress={goDetailPage}>
               <Card style={styles.card}>
                 <Card.Cover
@@ -38,14 +36,6 @@ const Products = ({navigation, products}) => {
           </View>
         ))}
       </View>
-      {/* {data === true ? (
-        <HomeDetail
-          imagePath={arrData.imagePath}
-          title={arrData.title}
-          price={arrData.price}
-          aboutProduct={arrData.aboutProduct}
-        />
-      ) : null} */}
     </View>
   );
 };
@@ -74,7 +64,7 @@ const styles = StyleSheet.create({
   cardEndTxt: {
     color: 'red',
     alignSelf: 'flex-end',
-    fontSize: wp(3),
+    paddingHorizontal: 3,
   },
   card: {
     borderRadius: 13,
@@ -84,13 +74,11 @@ const styles = StyleSheet.create({
   cardImg: {
     overflow: 'hidden',
     borderRadius: 13,
-    // borderTopRightRadius: 13,
-    // borderTopLefttRadius: 13,
     height: 100,
   },
   cardDangerTxt: {
     width: '100%',
-    marginTop: 4,
+    marginTop: 3,
   },
 });
 export default Products;

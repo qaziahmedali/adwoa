@@ -1,14 +1,6 @@
 import * as React from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {Colors} from '../../components/constants';
-import Feather from 'react-native-vector-icons/Feather';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -69,8 +61,6 @@ const styles = StyleSheet.create({
   TextView: {
     width: '100%',
     alignItems: 'flex-start',
-    // marginVertical: 2,
-    // borderBottomWidth: 1,
     borderColor: Colors.GREY,
     borderRadius: 10,
     flexDirection: 'row',
@@ -85,7 +75,6 @@ const styles = StyleSheet.create({
     fontSize: RFValue(15, 700),
     color: Colors.BLACK,
     paddingHorizontal: 10,
-    // fontWeight: 'bold',
   },
   icons: {
     color: Colors.BLACK,

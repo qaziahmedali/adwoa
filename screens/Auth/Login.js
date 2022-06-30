@@ -12,11 +12,9 @@ import {Colors} from '../../components/constants';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
 
-// import {RFValue} from 'react-native-responsive-fontsize';
-
 const Login = ({navigation}) => {
   const ForgetPassword = () => {
-    navigation.navigate('ForgetPasswordEmail');
+    navigation.navigate('VerificationEmail');
   };
   const handleData = () => {
     navigation.navigate('BottomTabbe');
@@ -24,7 +22,7 @@ const Login = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Header
-        label={'Admin Login'}
+        label={'Login'}
         navigation={navigation}
         color={Colors.RED}
         menuIcon={false}
@@ -97,16 +95,6 @@ const styles = StyleSheet.create({
   inputs: {
     paddingHorizontal: 10,
   },
-  // inputEmail: {
-  //   borderRadius: 10,
-  //   width: '100%',
-  //   paddingLeft: 10,
-  //   height: Platform.OS === 'ios' ? 40 : 40,
-  //   borderColor: Colors.GREY,
-  //   fontSize: RFValue(10, 580),
-  //   fontFamily: 'Poppins-Regular',
-  //   color: Colors.WHITE,
-  // },
   inputView: {
     width: '90%',
     borderWidth: 1,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StyleSheet, ScrollView, Image} from 'react-native';
+import {Text, View, StyleSheet, Image} from 'react-native';
 import {Colors} from '../../components/constants';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -8,7 +8,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-const Chats = ({navigation}) => {
+const ChatBodyHeader = ({navigation}) => {
   const GoBack = () => {
     navigation.goBack();
   };
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
     fontSize: RFValue(17, 700),
   },
 });
-export default Chats;
+export default ChatBodyHeader;

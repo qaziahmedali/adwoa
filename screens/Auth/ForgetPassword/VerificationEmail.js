@@ -16,9 +16,9 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-const ForgetPasswordEmail = ({navigation}) => {
+const VerificationEmail = ({navigation}) => {
   const verificationCode = () => {
-    navigation.navigate('VerificationCode');
+    navigation.navigate('VerificationForForgetPassword');
   };
   const GoBack = () => {
     navigation.goBack();
@@ -118,4 +118,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-export default ForgetPasswordEmail;
+export default VerificationEmail;

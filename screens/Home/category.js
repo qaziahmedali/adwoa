@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Text,
   View,
-  TextInput,
   StyleSheet,
   ScrollView,
   Image,
@@ -17,7 +16,6 @@ import {
 } from 'react-native-responsive-screen';
 
 const Category = ({navigation, categories, onClickCategory, selectedId}) => {
-  console.log('selectedId', selectedId);
   return (
     <View style={styles.WrapContainer}>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>

@@ -9,6 +9,7 @@ import {
   Pressable,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -36,11 +37,17 @@ const Header = ({navigation, label, color, menuIcon, align}) => {
   const handleOrders = () => {
     navigation.navigate('Orders');
   };
+  const handleProfile = () => {
+    navigation.navigate('Profile');
+  };
+  const handleChat = () => {
+    navigation.navigate('Chat');
+  };
   const GoBack = () => {
     navigation.goBack();
   };
   return (
-    <>
+    <View>
       {/*Heder start*/}
       <View
         style={{
@@ -124,7 +131,9 @@ const Header = ({navigation, label, color, menuIcon, align}) => {
                     />
                   </View>
                   <View style={{width: '80%'}}>
-                    <Text style={styles.MenuText}>Profile</Text>
+                    <Text style={styles.MenuText} onPress={handleProfile}>
+                      Profile
+                    </Text>
                   </View>
                 </View>
                 {/*Menus start*/}
@@ -138,14 +147,16 @@ const Header = ({navigation, label, color, menuIcon, align}) => {
                     />
                   </View>
                   <View style={{width: '80%'}}>
-                    <Text style={styles.MenuText}>Chat</Text>
+                    <Text style={styles.MenuText} onPress={handleChat}>
+                      Chat
+                    </Text>
                   </View>
                 </View>
                 {/*Menus start*/}
                 <View style={styles.mainMenusView}>
                   <View style={styles.MenusView}>
-                    <Icon
-                      name="chatbox"
+                    <Entypo
+                      name="shopping-bag"
                       style={{right: 5}}
                       size={wp(5)}
                       color={Colors.GREEN}
@@ -183,6 +194,7 @@ const Header = ({navigation, label, color, menuIcon, align}) => {
                       color={Colors.GREEN}
                     />
                   </View>
+
                   <View style={{width: '80%'}}>
                     <Text style={styles.MenuText} onPress={handleTerms}>
                       Terms & Conditions
@@ -242,7 +254,7 @@ const Header = ({navigation, label, color, menuIcon, align}) => {
           </View>
         </Modal>
       </View>
-    </>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -251,11 +263,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.GREEN,
     flexDirection: 'row',
   },
-  headerIconView: {
-    width: '20%',
-  },
+
   headerTextView: {
-    width: '80%',
+    width: '75%',
   },
   mainModalBodyView: {
     width: '100%',
@@ -306,7 +316,6 @@ const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
     alignItems: 'flex-start',
-    // marginTop: ,
   },
   modalView: {
     height: '100%',

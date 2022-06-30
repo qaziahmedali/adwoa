@@ -3,7 +3,7 @@ import * as React from 'react';
 import {View, Text, SafeAreaView, StyleSheet, ScrollView} from 'react-native';
 import {Colors} from '../../components/constants';
 import Header from '../../components/Header';
-const Contact = ({navigation}) => {
+const PrivacyPolicy = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -17,9 +17,9 @@ const Contact = ({navigation}) => {
       </View>
       <ScrollView>
         <View style={styles.mainView}>
-          <View style={styles.termsView}>
-            <Text style={styles.termsMainText}>Privacy Policy</Text>
-            <Text style={styles.termsParaText}>
+          <View style={styles.policyView}>
+            <Text style={styles.mainText}>Privacy Policy</Text>
+            <Text style={styles.policyParaText}>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
               mollitia, molestiae quas vel sint commodi repudiandae consequuntur
               voluptatum laborum numquam blanditiis harum quisquam eius sed odit
@@ -48,28 +48,24 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'flex-start',
   },
-  mainText: {
-    fontWeight: '600',
-    fontSize: RFValue(33, 700),
-    color: Colors.BLACK,
-  },
+
   mainParaText: {
     color: Colors.GREY,
   },
   icon: {
     padding: 13,
   },
-  termsView: {
+  policyView: {
     width: '100%',
     marginVertical: 10,
   },
-  termsMainText: {
+  mainText: {
     color: Colors.BLACK,
     fontWeight: '500',
     fontSize: RFValue(23, 700),
     alignItems: 'flex-start',
   },
-  termsParaText: {
+  policyParaText: {
     backgroundColor: '#EDE8E9',
     color: Colors.BLACK,
     textAlign: 'justify',
@@ -87,4 +83,4 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
   },
 });
-export default Contact;
+export default PrivacyPolicy;

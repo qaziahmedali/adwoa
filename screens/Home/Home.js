@@ -3,7 +3,7 @@ import {View, TextInput, StyleSheet, ScrollView} from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {Colors} from '../../components/constants';
 import Products from './Products';
-import Category from './category';
+import Category from './Category';
 import {products, categories} from './Data';
 
 import {
@@ -29,11 +29,9 @@ const Home = ({navigation}) => {
       });
       return item;
     });
-    console.log('newMergeProduct', newMergeProduct);
     const newFilterProducts = newMergeProduct.filter(
       item => item.categoryId == cid,
     );
-    console.log('newFilterProducts', newFilterProducts);
     setproductsFilterData(newFilterProducts);
   };
 
