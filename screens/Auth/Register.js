@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   TouchableOpacity,
@@ -7,22 +7,89 @@ import {
   Image,
   TextInput,
   Text,
+  ToastAndroid,
 } from 'react-native';
+
+import app from '../../config';
 import {Colors} from '../../components/constants';
 import Button from '../../components/Button';
-import Header from './header';
-import {RFValue} from 'react-native-responsive-fontsize';
+import Header from '../../components/Header';
+import {ComplexAnimationBuilder} from 'react-native-reanimated';
+import {toast} from '../../components/Toast';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {baseUrl} from '../../Config/BaseUrl';
 
 const Register = ({navigation}) => {
-  const handleData = () => {
-    navigation.navigate('Login');
+  console.log(app);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // random id ...
+  var id = '';
+  var characters = 'AEFGHbcdefghijklstuvwxyz0123456789';
+  for (var i = 0; i < characters.length; i++) {
+    id += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+
+  // fetching api ...
+  const handleData = async () => {
+    if (!name) {
+      toast('Please enter your name');
+      return;
+    }
+    if (!email) {
+      toast('Please enter your email');
+      return;
+    }
+    if (!password) {
+      toast('Pasword must be 6 character at least');
+      return;
+    }
+    if (name && email && password) {
+      await fetch(`${baseUrl}/register.json`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (res) {
+            setName('');
+            setEmail('');
+            setPassword('');
+            toast('Data stored successfully');
+            AsyncStorage.setItem('email', res.email);
+            alert('Data successfully saved');
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      toast('Please Enter all Fields');
+    }
+    navigation.navigate('VerificationForEmail');
   };
+
   const Login = () => {
     navigation.navigate('Login');
   };
   return (
     <View style={styles.container}>
-      <Header label={'Admin Register'} />
+      <Header
+        label={'Register'}
+        navigation={navigation}
+        color={Colors.RED}
+        menuIcon={false}
+        align={'center'}
+      />
 
       <ScrollView>
         <View style={styles.mainForBody}>
@@ -39,6 +106,8 @@ const Register = ({navigation}) => {
               placeholderTextColor={Colors.GREY}
               color={Colors.GREY}
               style={styles.inputs}
+              value={name}
+              onChangeText={e => setName(e)}
             />
           </View>
           <View style={styles.inputView}>
@@ -47,6 +116,8 @@ const Register = ({navigation}) => {
               placeholderTextColor={Colors.GREY}
               color={Colors.GREY}
               style={styles.inputs}
+              value={email}
+              onChangeText={e => setEmail(e)}
             />
           </View>
           <View style={styles.inputView}>
@@ -56,23 +127,27 @@ const Register = ({navigation}) => {
               color={Colors.GREY}
               style={styles.inputs}
               secureTextEntry={true}
+              value={password}
+              onChangeText={e => setPassword(e)}
             />
           </View>
+
+          <Button
+            navigation={navigation}
+            label={'Register'}
+            onPress={() => handleData()}
+            color={Colors.RED}
+          />
           <View style={styles.forgetButton}>
             <TouchableOpacity>
               <Text
                 navigation={navigation}
                 style={styles.forgetBtnText}
                 onPress={Login}>
-                Sign in
+                Already have an account?
               </Text>
             </TouchableOpacity>
           </View>
-          <Button
-            navigation={navigation}
-            label={'Register'}
-            onPress={handleData}
-          />
         </View>
       </ScrollView>
     </View>
@@ -95,19 +170,9 @@ const styles = StyleSheet.create({
     height: 100,
   },
   mainImg: {width: '90%', alignItems: 'center'},
-  scrollView: {
-    // height: calcSize(40),
+  inputs: {
+    paddingHorizontal: 10,
   },
-  // inputEmail: {
-  //   borderRadius: 10,
-  //   width: '100%',
-  //   paddingLeft: 10,
-  //   height: Platform.OS === 'ios' ? 40 : 40,
-  //   borderColor: Colors.GREY,
-  //   fontSize: RFValue(10, 580),
-  //   fontFamily: 'Poppins-Regular',
-  //   color: Colors.WHITE,
-  // },
   inputView: {
     width: '90%',
     borderWidth: 1,

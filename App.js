@@ -6,15 +6,17 @@ import Menu from './screens/MainMenu/Menu';
 import Register from './screens/Auth/Register';
 import Login from './screens/Auth/Login';
 import Contact from './screens/Contact/Contact';
-import ForgetPasswordEmail from './screens/Auth/ForgetPassword/ForgetPasswordEmail';
-import VerificationCode from './screens/Auth/ForgetPassword/VerificationCode';
+import VerificationEmail from './screens/Auth/ForgetPassword/VerificationEmail';
+import VerificationForEmail from './screens/Auth/ForgetPassword/VerificationForEmail';
+import VerificationForForgetPassword from './screens/Auth/ForgetPassword/VerificationForForgetPassword';
 import NewPassword from './screens/Auth/ForgetPassword/NewPassword';
 import ChatBodyHeader from './screens/Chat/ChatBodyHeader';
 import HomeDetail from './screens/Home/HomeDetail';
-import Drawers from './components/Drawers';
 import Faq from './screens/Contact/Faq';
-import Terms from './screens/Contact/terms';
+import Terms from './screens/Contact/Terms';
 import PrivacyPolicy from './screens/Contact/PrivacyPolicy';
+import Orders from './screens/Orders/Orders';
+import ProfileUpdate from './screens/Profile/ProfileUpdate';
 const Stack = createStackNavigator();
 
 function App() {
@@ -37,13 +39,18 @@ function App() {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="ForgetPasswordEmail"
-          component={ForgetPasswordEmail}
+          name="VerificationEmail"
+          component={VerificationEmail}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="VerificationCode"
-          component={VerificationCode}
+          name="VerificationForEmail"
+          component={VerificationForEmail}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="VerificationForForgetPassword"
+          component={VerificationForForgetPassword}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -51,12 +58,22 @@ function App() {
           component={NewPassword}
           options={{headerShown: false}}
         />
+
         <Stack.Screen
           name="BottomTabbe"
           component={BottomTabbe}
           options={{headerShown: false}}
         />
-
+        <Stack.Screen
+          name="Orders"
+          component={Orders}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ProfileUpdate"
+          component={ProfileUpdate}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Contact"
           component={Contact}

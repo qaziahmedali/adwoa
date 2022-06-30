@@ -8,35 +8,22 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Colors} from '../../components/constants';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-// import ChatData from './HomeData';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+import Header from '../../components/Header';
 const Chat = ({navigation}) => {
-  const GoBack = () => {
-    navigation.goBack();
-  };
   const userMessages = () => {
     navigation.navigate('ChatBodyHeader');
   };
   return (
     <View style={styles.container}>
-      <View style={styles.mainForHeader}>
-        <AntDesign
-          name="arrowleft"
-          size={wp(6)}
-          color={Colors.WHITE}
-          style={styles.icon}
-          onPress={GoBack}
-        />
-        <View style={styles.headerTextView}>
-          <Text style={styles.headerText}>Recent Chat</Text>
-        </View>
-      </View>
+      <Header
+        label={'Recent  Chat'}
+        navigation={navigation}
+        color={Colors.GREEN}
+        menuIcon={false}
+        align={'flex-start'}
+      />
       <ScrollView>
         <View style={styles.chatsListView}>
           <Image
@@ -73,31 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
   },
-  mainForHeader: {
-    width: '100%',
-    backgroundColor: Colors.GREEN,
-    flexDirection: 'row',
-  },
-  headerIconView: {
-    width: '20%',
-  },
-  headerTextView: {
-    width: '80%',
-  },
-  headerText: {
-    color: Colors.WHITE,
-    paddingVertical: 13,
-    alignSelf: 'flex-start',
-    fontWeight: '600',
-    fontSize: RFValue(17, 700),
-  },
-  iconView: {
-    marginVertical: 12,
-    width: '10%',
-  },
-  icon: {
-    padding: 13,
-  },
+
   chatsListView: {
     width: '100%',
     flexDirection: 'row',

@@ -6,7 +6,6 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  Alert,
   Modal,
   Pressable,
 } from 'react-native';
@@ -346,6 +345,171 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 15,
     textAlign: 'center',
+  },
+});
+export default Home;
+// 
+import React, {useState} from 'react';
+import {Text, View, StyleSheet, Pressable, ScrollView} from 'react-native';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import Feather from 'react-native-vector-icons/Feather';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import HomeDetail from './HomeDetail';
+import {Button, Card, Title, Paragraph} from 'react-native-paper';
+const Home = ({navigation}) => {
+  const [data, setData] = useState(false);
+  const goDetailPage = () => {
+    navigation.navigate('HomeDetail');
+    setData(true);
+  };
+
+  const arrData = [
+    {
+      imagePath:
+        'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg',
+      title: 'House for Sale',
+      price: '$497,346,000',
+      aboutProduct: 'Real Estate',
+    },
+    {
+      imagePath:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7WaZeNBdknJuXPFA6zOo3GwT-RLebMbWcqw&usqp=CAU',
+      title: 'Car for Sale',
+      price: '$497,346,00',
+      aboutProduct: 'Real Estate',
+    },
+    {
+      imagePath:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkI4xWrqp4BKx8aYWcpHICFPtpTYmEtmnySg&usqp=CAU',
+      title: 'Car for Sale',
+      price: '$497,346,00',
+      aboutProduct: 'Real Estate',
+    },
+    {
+      imagePath: 'https://thumbs.dreamstime.com/b/blue-shoes-29507491.jpg',
+      title: 'Shoes for Sale',
+      price: '$497,34',
+      aboutProduct: 'Real Estate',
+    },
+    {
+      imagePath:
+        'https://i.pinimg.com/736x/9e/e3/77/9ee377451d6dd4239ba92571f4f1de40.jpg',
+      title: 'Lounge set',
+      price: '$497,346',
+      aboutProduct: 'Real Estate',
+    },
+    {
+      imagePath:
+        'https://media.istockphoto.com/photos/clothes-shop-interior-picture-id901863672?k=20&m=901863672&s=612x612&w=0&h=0bpyh7rdYCy3Lod5pfK9oS72zFPNJSBv7T7l64xUE90=',
+      title: 'House for Sale',
+      price: '$497,346,000',
+      aboutProduct: 'Real Estate',
+    },
+    {
+      imagePath:
+        'https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg',
+      title: 'House for Sale',
+      price: '$497,346,000',
+      aboutProduct: 'Real Estate',
+    },
+    {
+      imagePath:
+        'https://media.istockphoto.com/photos/clothes-shop-interior-picture-id901863672?k=20&m=901863672&s=612x612&w=0&h=0bpyh7rdYCy3Lod5pfK9oS72zFPNJSBv7T7l64xUE90=',
+      title: 'House for Sale',
+      price: '$497,346,000',
+      aboutProduct: 'Real Estate',
+    },
+  ];
+  {
+    arrData.map(item => console.log(arrData?.title));
+  }
+
+  return (
+    <>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <View style={styles.cardMainCategory}></View>
+      </ScrollView>
+      <View style={{width: '100%'}}>
+        <View style={styles.mainForCard}>
+          {arrData.map(item => (
+            <View style={styles.cardMain}>
+              <Pressable onPress={goDetailPage}>
+                <Card style={styles.card}>
+                  <Card.Cover
+                    source={{
+                      uri: `${item.imagePath}`,
+                    }}
+                    style={styles.cardImg}
+                  />
+                  <View style={styles.cardBody}>
+                    <Paragraph style={styles.cardParaTxt}>
+                      {item.title}
+                    </Paragraph>
+                    <Paragraph>{item.price}</Paragraph>
+                    <View style={styles.cardDangerTxt}>
+                      <Paragraph style={styles.cardEndTxt}>
+                        {item.aboutProduct}
+                      </Paragraph>
+                    </View>
+                  </View>
+                </Card>
+              </Pressable>
+            </View>
+          ))}
+        </View>
+      </View>
+      {data === true ? (
+        <HomeDetail
+          imagePath={arrData.imagePath}
+          title={arrData.title}
+          price={arrData.price}
+          aboutProduct={arrData.aboutProduct}
+        />
+      ) : null}
+    </>
+  );
+};
+const styles = StyleSheet.create({
+  mainForCard: {flexDirection: 'row', width: '100%', flexWrap: 'wrap'},
+  cardMain: {
+    display: 'flex',
+    marginHorizontal: 3,
+    width: '48%',
+    borderRadius: '25',
+    marginTop: 10,
+  },
+  cardBody: {
+    width: '95%',
+    alignSelf: 'center',
+    height: 75,
+  },
+  cardParaTxt: {
+    fontWeight: 'bold',
+    marginBottom: 0,
+  },
+  cardEndTxt: {
+    color: 'red',
+    alignSelf: 'flex-end',
+    fontSize: wp(3),
+  },
+  card: {
+    borderRadius: 13,
+    overflow: 'hidden',
+    elevation: 5,
+  },
+  cardImg: {
+    overflow: 'hidden',
+    // borderRadius: 13,
+    borderTopRightRadius: 13,
+    borderTopLefttRadius: 13,
+    height: 100,
+  },
+  cardDangerTxt: {
+    width: '100%',
+    marginTop: 4,
   },
 });
 export default Home;

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "840906097266",
+    "firebase_url": "https://adwoa-app-default-rtdb.firebaseio.com",
+    "project_id": "adwoa-app",
+    "storage_bucket": "adwoa-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:840906097266:android:f24c73d28d37f3be8038eb",
+        "android_client_info": {
+          "package_name": "com.adwoa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "840906097266-3pjqq0tbh6uj3ov28f1lbb23csdu6am9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd8ldv7xgBVp8LoFnRvTak-plUUVfRvxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "840906097266-3pjqq0tbh6uj3ov28f1lbb23csdu6am9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

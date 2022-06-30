@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
+import React from 'react';
+
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
+import {RFValue} from 'react-native-responsive-fontsize';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -12,7 +12,7 @@ import {
 const Tab = createBottomTabNavigator();
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Home from './Home/Home';
-import Profile from './Profile/Profile';
+import Profile from './Profile/ProfileMenu';
 import Chat from './Chat/Chat';
 import AddProduct from './Add product/AddProduct';
 
@@ -60,6 +60,5 @@ const BottomTabbe = ({navigation}) => {
     </Tab.Navigator>
   );
 };
-const styles = StyleSheet.create({});
 
 export default BottomTabbe;

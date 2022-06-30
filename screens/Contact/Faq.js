@@ -4,21 +4,17 @@ import {
   Text,
   SafeAreaView,
   StyleSheet,
-  TextInput,
-  Pressable,
-  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 import {Colors} from '../../components/constants';
 import Feather from 'react-native-vector-icons/Feather';
 import {RFValue} from 'react-native-responsive-fontsize';
-import Entypo from 'react-native-vector-icons/Entypo';
 
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import Header from '../../components/modalHeader';
+import Header from '../../components/Header';
 
 const Faq = ({navigation}) => {
   const [faqQuestion1, setFaqQuestion1] = React.useState(false);
@@ -27,11 +23,17 @@ const Faq = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Header label={'Faq'} navigation={navigation} />
+        <Header
+          label={'Faq'}
+          navigation={navigation}
+          color={Colors.GREEN}
+          menuIcon={false}
+          align={'center'}
+        />
       </View>
       <View style={styles.mainView}>
         <View style={styles.termsView}>
-          <Text style={styles.termsMainText}>FAQ</Text>
+          <Text style={styles.mainText}>FAQ</Text>
           <View style={styles.faqMain}>
             <View style={styles.faqBody}>
               <TouchableOpacity onPress={() => setFaqQuestion1(!faqQuestion1)}>
@@ -86,6 +88,33 @@ const Faq = ({navigation}) => {
               </Text>
             ) : null}
           </View>
+          <View style={styles.faqMain}>
+            <View style={styles.faqBody}>
+              <TouchableOpacity onPress={() => setFaqQuestion3(!faqQuestion3)}>
+                <Text style={styles.faqQuestion}>
+                  Lorem ipsum dolor sit amet consectetur
+                </Text>
+              </TouchableOpacity>
+              {faqQuestion3 ? (
+                <Feather
+                  name="chevron-up"
+                  size={wp(6)}
+                  style={styles.DownIcons}
+                />
+              ) : (
+                <Feather
+                  name="chevron-down"
+                  size={wp(6)}
+                  style={styles.DownIcons}
+                />
+              )}
+            </View>
+            {faqQuestion3 ? (
+              <Text style={styles.faqAnswer}>
+                Lorem ipsum dolor sit amet dolor sit amet consectetur
+              </Text>
+            ) : null}
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -103,16 +132,14 @@ const styles = StyleSheet.create({
     width: '100%',
     marginVertical: 15,
   },
-  termsMainText: {
+
+  mainText: {
     color: Colors.BLACK,
     fontWeight: '500',
     fontSize: RFValue(23, 700),
     alignItems: 'flex-start',
   },
-  termsParaText: {
-    color: Colors.BLACK,
-    textAlign: 'justify',
-  },
+
   faqQuestion: {
     marginTop: 10,
     color: Colors.GREEN,

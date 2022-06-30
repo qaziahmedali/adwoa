@@ -1,17 +1,9 @@
 import React from 'react';
-import {
-  ScrollView,
-  TouchableOpacity,
-  View,
-  StyleSheet,
-  TextInput,
-  Text,
-} from 'react-native';
+import {ScrollView, View, StyleSheet, TextInput, Text} from 'react-native';
 import {Colors} from '../../../components/constants';
 import Button from '../../../components/Button';
 import {RFValue} from 'react-native-responsive-fontsize';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {useHistory} from 'react-router-dom';
 
 import {
   widthPercentageToDP as wp,
@@ -63,6 +55,7 @@ const NewPassword = ({navigation}) => {
               navigation={navigation}
               label={'Send'}
               onPress={EnterNewPassword}
+              color={Colors.RED}
             />
           </View>
         </View>

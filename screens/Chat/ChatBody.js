@@ -16,52 +16,128 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {TextInput} from 'react-native-gesture-handler';
-const ChatBody = ({navigation}) => {
-  const GoBack = () => {
-    navigation.goBack();
-  };
-
+const ChatBody = () => {
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{flexDirection: 'row'}}>
-          <View style={styles.RowCont}>
-            <View style={styles.senderMainCol1}>
-              <View style={styles.Sender}>
-                <Image
-                  source={require('../../assets/user.jpg')}
-                  style={styles.UserImg}
-                  resizeMode="contain"
-                />
-                <View style={styles.SenderCol1}>
-                  <View style={styles.SenderMesaageBubble}>
-                    <Text style={styles.SenderMessage}>
-                      Helloo Bro how are you hey guiys here is zulki. What about
-                      you. ia ma fine hey guiys here is zulki. What about you.
-                      ia ma fine hey guiys here is zulki. What about you. ia ma
-                      fine finefine
-                    </Text>
+        <View style={styles.mainChatBody}>
+          <View style={{flexDirection: 'row'}}>
+            <View style={styles.RowCont}>
+              <View style={styles.senderMainCol1}>
+                <View style={styles.Sender}>
+                  <Image
+                    source={require('../../assets/user.jpg')}
+                    style={styles.UserImg}
+                    resizeMode="contain"
+                  />
+                  <View style={styles.SenderCol1}>
+                    <View style={styles.SenderMesaageBubble}>
+                      <Text style={styles.SenderMessage}>
+                        consectetur adipisicing elit. Maxime mollitia, molestiae
+                        quas vel sint commodi repudiandae consequuntur
+                        voluptatum laborum numquam blanditiis harum quisquam
+                        eius sed odit
+                      </Text>
+                    </View>
+                    <Text style={styles.time}>12PM</Text>
                   </View>
-                  <Text style={styles.time}>12PM</Text>
                 </View>
               </View>
             </View>
           </View>
-        </View>
-        <View style={styles.RowCont}>
-          <View style={styles.receiverMainCol1}>
-            <View style={styles.ReciverCol1}>
-              <View style={styles.ReciverMessageBubble}>
-                <Text style={styles.ReciverMessage}>
-                  hey guiys here is zulki. What about you. ia ma fine hey guiys
-                  here is zulki. What about you. ia ma fine hey guiys here is
-                  zulki. What about you. ia ma fine fine fine
-                </Text>
+          <View style={styles.RowCont}>
+            <View style={styles.receiverMainCol1}>
+              <View style={styles.ReciverCol1}>
+                <View style={styles.ReciverMessageBubble}>
+                  <Text style={styles.ReciverMessage}>
+                    quas vel sint commodi repudiandae consequuntur voluptatum
+                    quas quas vel sint commodi repudiandae consequuntur
+                    voluptatum vel sint commodi repudiandae consequuntur
+                    voluptatum
+                  </Text>
+                </View>
+                <Text style={styles.time}>12PM</Text>
               </View>
-              <Text style={styles.time}>12PM</Text>
             </View>
           </View>
-          {/* <View style={{width: '20%'}} /> */}
+          <View style={{flexDirection: 'row'}}>
+            <View style={styles.RowCont}>
+              <View style={styles.senderMainCol1}>
+                <View style={styles.Sender}>
+                  <Image
+                    source={require('../../assets/user.jpg')}
+                    style={styles.UserImg}
+                    resizeMode="contain"
+                  />
+                  <View style={styles.SenderCol1}>
+                    <View style={styles.SenderMesaageBubble}>
+                      <Text style={styles.SenderMessage}>
+                        consectetur adipisicing elit. Maxime mollitia, molestiae
+                        quas vel sint commodi repudiandae consequuntur
+                        voluptatum laborum numquam blanditiis harum quisquam
+                        eius sed odit
+                      </Text>
+                    </View>
+                    <Text style={styles.time}>12PM</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={styles.RowCont}>
+            <View style={styles.receiverMainCol1}>
+              <View style={styles.ReciverCol1}>
+                <View style={styles.ReciverMessageBubble}>
+                  <Text style={styles.ReciverMessage}>
+                    quas vel sint commodi repudiandae consequuntur voluptatum
+                    quas quas vel sint commodi repudiandae consequuntur
+                    voluptatum vel sint commodi repudiandae consequuntur
+                    voluptatum
+                  </Text>
+                </View>
+                <Text style={styles.time}>12PM</Text>
+              </View>
+            </View>
+          </View>
+          <View style={{flexDirection: 'row'}}>
+            <View style={styles.RowCont}>
+              <View style={styles.senderMainCol1}>
+                <View style={styles.Sender}>
+                  <Image
+                    source={require('../../assets/user.jpg')}
+                    style={styles.UserImg}
+                    resizeMode="contain"
+                  />
+                  <View style={styles.SenderCol1}>
+                    <View style={styles.SenderMesaageBubble}>
+                      <Text style={styles.SenderMessage}>
+                        consectetur adipisicing elit. Maxime mollitia, molestiae
+                        quas vel sint commodi repudiandae consequuntur
+                        voluptatum laborum numquam blanditiis harum quisquam
+                        eius sed odit
+                      </Text>
+                    </View>
+                    <Text style={styles.time}>12PM</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={styles.RowCont}>
+            <View style={styles.receiverMainCol1}>
+              <View style={styles.ReciverCol1}>
+                <View style={styles.ReciverMessageBubble}>
+                  <Text style={styles.ReciverMessage}>
+                    quas vel sint commodi repudiandae consequuntur voluptatum
+                    quas quas vel sint commodi repudiandae consequuntur
+                    voluptatum vel sint commodi repudiandae consequuntur
+                    voluptatum
+                  </Text>
+                </View>
+                <Text style={styles.time}>12PM</Text>
+              </View>
+            </View>
+          </View>
         </View>
       </ScrollView>
       <View style={styles.Footer}>
@@ -91,9 +167,11 @@ const styles = StyleSheet.create({
   RowCont: {
     width: '100%',
     flexDirection: 'row',
-    marginTop: hp(2),
   },
-
+  mainChatBody: {
+    marginTop: 15,
+    marginBottom: 65,
+  },
   UserImg: {
     width: 35,
     height: 35,
@@ -128,7 +206,6 @@ const styles = StyleSheet.create({
   },
   SenderCol1: {
     maxWidth: '70%',
-    // paddingHorizontal: wp(4),
   },
   ReciverMessageBubble: {
     backgroundColor: Colors.LIGHTGREEN,

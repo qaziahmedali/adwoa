@@ -10,22 +10,26 @@ import {
 } from 'react-native';
 import {Colors} from '../../components/constants';
 import Button from '../../components/Button';
-
-import Header from './header';
-// import {RFValue} from 'react-native-responsive-fontsize';
+import Header from '../../components/Header';
 
 const Login = ({navigation}) => {
   const ForgetPassword = () => {
-    navigation.navigate('ForgetPasswordEmail');
+    navigation.navigate('VerificationEmail');
   };
   const handleData = () => {
     navigation.navigate('BottomTabbe');
   };
   return (
     <View style={styles.container}>
-      <Header label={'Admin Login'} />
+      <Header
+        label={'Login'}
+        navigation={navigation}
+        color={Colors.RED}
+        menuIcon={false}
+        align={'center'}
+      />
 
-      <ScrollView contentContainerStyle={{flex: 1}}>
+      <ScrollView>
         <View style={styles.mainForBody}>
           <View style={styles.mainImg}>
             <Image
@@ -64,6 +68,7 @@ const Login = ({navigation}) => {
           <Button
             navigation={navigation}
             label={'Login'}
+            color={Colors.RED}
             onPress={handleData}
           />
         </View>
@@ -90,16 +95,6 @@ const styles = StyleSheet.create({
   inputs: {
     paddingHorizontal: 10,
   },
-  // inputEmail: {
-  //   borderRadius: 10,
-  //   width: '100%',
-  //   paddingLeft: 10,
-  //   height: Platform.OS === 'ios' ? 40 : 40,
-  //   borderColor: Colors.GREY,
-  //   fontSize: RFValue(10, 580),
-  //   fontFamily: 'Poppins-Regular',
-  //   color: Colors.WHITE,
-  // },
   inputView: {
     width: '90%',
     borderWidth: 1,
