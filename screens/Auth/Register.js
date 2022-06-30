@@ -7,10 +7,8 @@ import {
   Image,
   TextInput,
   Text,
-  ToastAndroid,
 } from 'react-native';
 
-import app from '../../config';
 import {Colors} from '../../components/constants';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
@@ -20,10 +18,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {baseUrl} from '../../Config/BaseUrl';
 
 const Register = ({navigation}) => {
-  console.log(app);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
 
   // random id ...
   var id = '';
@@ -47,7 +45,7 @@ const Register = ({navigation}) => {
       return;
     }
     if (name && email && password) {
-      await fetch(`${baseUrl}/register.json`, {
+      await fetch(`${baseUrl}/api/register`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -56,18 +54,24 @@ const Register = ({navigation}) => {
           name,
           email,
           password,
+          phone,
+          role: 'seller',
         }),
       })
+        // .then(res => JSON.parse(JSON.stringify(res)))
         .then(res => res.json())
         .then(res => {
-          if (res) {
+          if (res.message === 'success') {
             setName('');
             setEmail('');
             setPassword('');
+            setPhone('');
             toast('Data stored successfully');
-            AsyncStorage.setItem('email', res.email);
-            alert('Data successfully saved');
+            navigation.navigate('VerificationForEmail');
+
+            AsyncStorage.setItem('email', res.email_message.email);
           }
+          console.log(res);
         })
         .catch(err => {
           console.log(err);
@@ -75,7 +79,6 @@ const Register = ({navigation}) => {
     } else {
       toast('Please Enter all Fields');
     }
-    navigation.navigate('VerificationForEmail');
   };
 
   const Login = () => {
@@ -116,6 +119,7 @@ const Register = ({navigation}) => {
               placeholderTextColor={Colors.GREY}
               color={Colors.GREY}
               style={styles.inputs}
+              keyboardType="email-address"
               value={email}
               onChangeText={e => setEmail(e)}
             />
@@ -129,6 +133,17 @@ const Register = ({navigation}) => {
               secureTextEntry={true}
               value={password}
               onChangeText={e => setPassword(e)}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              placeholder="Phone"
+              placeholderTextColor={Colors.GREY}
+              color={Colors.GREY}
+              style={styles.inputs}
+              keyboardType="phone-pad"
+              value={phone}
+              onChangeText={e => setPhone(e)}
             />
           </View>
 
@@ -172,6 +187,7 @@ const styles = StyleSheet.create({
   mainImg: {width: '90%', alignItems: 'center'},
   inputs: {
     paddingHorizontal: 10,
+    color: Colors.BLACK,
   },
   inputView: {
     width: '90%',

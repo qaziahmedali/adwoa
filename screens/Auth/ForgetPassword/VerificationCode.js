@@ -16,35 +16,42 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {toast} from '../../../components/Toast';
 const VerifictaionCode = ({navigation, label}) => {
-  const CELL_COUNT = 4;
+  const CELL_COUNT = 5;
   const [value, setValue] = React.useState('');
-  const ref = useBlurOnFulfill({code, cellCount: CELL_COUNT});
+  const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue,
   });
   // fetching api
-  AsyncStorage.getItem('email');
   const EnterVerificationCode = async () => {
-    await fetch(`${baseUrl}/code-verify`, {
+    var email = await AsyncStorage.getItem('email');
+    console.log(email, typeof value);
+
+    await fetch(`${baseUrl}/api/code-verify`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
       body: JSON.stringify({
         email,
-        value,
+        code: value,
+        type: 'verification',
       }),
     })
       .then(res => res.json())
       .then(res => {
+        if (res.message === 'verified') {
+          toast('Email verified');
+          navigation.navigate('NewPassword');
+        }
         console.log(res);
       })
       .catch(err => {
         console.log(err);
       });
-    navigation.navigate('NewPassword');
   };
   const GoBack = () => {
     navigation.goBack();
@@ -59,7 +66,7 @@ const VerifictaionCode = ({navigation, label}) => {
               size={wp(6)}
               color={Colors.WHITE}
               style={styles.iconBack}
-              onPress={GoBack}
+              onPress={() => GoBack()}
             />
           </View>
           <View style={styles.ForgetTextView}>
@@ -149,7 +156,7 @@ const styles = StyleSheet.create({
     marginVertical: 7,
   },
   cell: {
-    width: 65,
+    width: 50,
     height: 40,
     lineHeight: 40,
     fontSize: RFValue(24, 580),

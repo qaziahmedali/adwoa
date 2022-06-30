@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   TouchableOpacity,
@@ -12,12 +12,48 @@ import {Colors} from '../../components/constants';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
 
+import {toast} from '../../components/Toast';
+import {baseUrl} from '../../Config/BaseUrl';
 const Login = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const ForgetPassword = () => {
     navigation.navigate('VerificationEmail');
   };
-  const handleData = () => {
-    navigation.navigate('BottomTabbe');
+  const handleData = async () => {
+    if (!email) {
+      toast('Please enter your email');
+      return;
+    }
+    if (!password) {
+      toast('Pasword must be 6 character at least');
+      return;
+    }
+    await fetch(`${baseUrl}/api/login`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.message === 'success') {
+          setEmail('');
+          setPassword('');
+          toast('signIn successfully');
+          navigation.navigate('BottomTabbe');
+        } else {
+          toast('email is not existing');
+        }
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
   return (
     <View style={styles.container}>
@@ -44,6 +80,9 @@ const Login = ({navigation}) => {
               placeholderTextColor={Colors.GREY}
               color={Colors.GREY}
               style={styles.inputs}
+              keyboardType="email-address"
+              value={email}
+              onChangeText={e => setEmail(e)}
             />
           </View>
           <View style={styles.inputView}>
@@ -53,6 +92,8 @@ const Login = ({navigation}) => {
               color={Colors.GREY}
               style={styles.inputs}
               secureTextEntry={true}
+              value={password}
+              onChangeText={e => setPassword(e)}
             />
           </View>
           <View style={styles.forgetButton}>

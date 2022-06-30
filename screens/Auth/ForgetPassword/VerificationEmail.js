@@ -18,7 +18,7 @@ import {
 
 const VerificationEmail = ({navigation}) => {
   const verificationCode = () => {
-    navigation.navigate('VerificationForForgetPassword');
+    navigation.navigate('VerificationForPassword');
   };
   const GoBack = () => {
     navigation.goBack();
@@ -27,7 +27,6 @@ const VerificationEmail = ({navigation}) => {
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.mainForBody}>
-          {/* <TouchableOpacity> */}
           <TouchableOpacity style={styles.ForgetTextView}>
             <AntDesign
               name="arrowleft"
@@ -37,7 +36,6 @@ const VerificationEmail = ({navigation}) => {
               onPress={GoBack}
             />
           </TouchableOpacity>
-          {/* </TouchableOpacity> */}
           <View style={styles.ForgetTextView}>
             <Text style={styles.ForgetText}>Forget Password</Text>
           </View>

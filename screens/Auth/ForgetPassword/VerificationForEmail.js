@@ -1,8 +1,8 @@
 import React from 'react';
 import VerificationCode from './VerificationCode';
 
-const verificationForEmail = () => {
-  return <VerificationCode label="Verify Email" />;
+const VerificationForEmail = ({navigation}) => {
+  return <VerificationCode label="Verify Email" navigation={navigation} />;
 };
 
-export default verificationForEmail;
+export default VerificationForEmail;

@@ -8,7 +8,7 @@ import Login from './screens/Auth/Login';
 import Contact from './screens/Contact/Contact';
 import VerificationEmail from './screens/Auth/ForgetPassword/VerificationEmail';
 import VerificationForEmail from './screens/Auth/ForgetPassword/VerificationForEmail';
-import VerificationForForgetPassword from './screens/Auth/ForgetPassword/VerificationForForgetPassword';
+import VerificationForPassword from './screens/Auth/ForgetPassword/VerificationForPassword';
 import NewPassword from './screens/Auth/ForgetPassword/NewPassword';
 import ChatBodyHeader from './screens/Chat/ChatBodyHeader';
 import HomeDetail from './screens/Home/HomeDetail';
@@ -49,8 +49,8 @@ function App() {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="VerificationForForgetPassword"
-          component={VerificationForForgetPassword}
+          name="VerificationForPassword"
+          component={VerificationForPassword}
           options={{headerShown: false}}
         />
         <Stack.Screen
