@@ -49,10 +49,11 @@ const styles = StyleSheet.create({
     marginTop: 60,
   },
   footer: {
-    width: '100%',
+    width: '93%',
     marginBottom: 0,
     bottom: 20,
     alignItems: 'center',
+    alignSelf: 'center',
     justifyContent: 'center',
     position: 'absolute',
   },

@@ -35,26 +35,19 @@ const Faq = ({navigation}) => {
         <View style={styles.termsView}>
           <Text style={styles.mainText}>FAQ</Text>
           <View style={styles.faqMain}>
-            <View style={styles.faqBody}>
-              <TouchableOpacity onPress={() => setFaqQuestion1(!faqQuestion1)}>
+            <TouchableOpacity onPress={() => setFaqQuestion1(!faqQuestion1)}>
+              <View style={styles.faqBody}>
                 <Text style={styles.faqQuestion}>
                   Lorem ipsum dolor sit amet consectetur
                 </Text>
-              </TouchableOpacity>
-              {faqQuestion1 ? (
                 <Feather
-                  name="chevron-up"
+                  name={faqQuestion1 ? 'chevron-up' : 'chevron-down'}
                   size={wp(6)}
                   style={styles.DownIcons}
                 />
-              ) : (
-                <Feather
-                  name="chevron-down"
-                  size={wp(6)}
-                  style={styles.DownIcons}
-                />
-              )}
-            </View>
+              </View>
+            </TouchableOpacity>
+
             {faqQuestion1 ? (
               <Text style={styles.faqAnswer}>
                 Lorem ipsum dolor sit amet dolor sit amet consectetur
@@ -62,26 +55,19 @@ const Faq = ({navigation}) => {
             ) : null}
           </View>
           <View style={styles.faqMain}>
-            <View style={styles.faqBody}>
-              <TouchableOpacity onPress={() => setFaqQuestion2(!faqQuestion2)}>
+            <TouchableOpacity onPress={() => setFaqQuestion2(!faqQuestion2)}>
+              <View style={styles.faqBody}>
                 <Text style={styles.faqQuestion}>
                   Lorem ipsum dolor sit amet consectetur
                 </Text>
-              </TouchableOpacity>
-              {faqQuestion2 ? (
                 <Feather
-                  name="chevron-up"
+                  name={faqQuestion2 ? 'chevron-up' : 'chevron-down'}
                   size={wp(6)}
                   style={styles.DownIcons}
                 />
-              ) : (
-                <Feather
-                  name="chevron-down"
-                  size={wp(6)}
-                  style={styles.DownIcons}
-                />
-              )}
-            </View>
+              </View>
+            </TouchableOpacity>
+
             {faqQuestion2 ? (
               <Text style={styles.faqAnswer}>
                 Lorem ipsum dolor sit amet dolor sit amet consectetur
@@ -89,26 +75,18 @@ const Faq = ({navigation}) => {
             ) : null}
           </View>
           <View style={styles.faqMain}>
-            <View style={styles.faqBody}>
-              <TouchableOpacity onPress={() => setFaqQuestion3(!faqQuestion3)}>
+            <TouchableOpacity onPress={() => setFaqQuestion3(!faqQuestion3)}>
+              <View style={styles.faqBody}>
                 <Text style={styles.faqQuestion}>
                   Lorem ipsum dolor sit amet consectetur
                 </Text>
-              </TouchableOpacity>
-              {faqQuestion3 ? (
                 <Feather
-                  name="chevron-up"
+                  name={faqQuestion3 ? 'chevron-up' : 'chevron-down'}
                   size={wp(6)}
                   style={styles.DownIcons}
                 />
-              ) : (
-                <Feather
-                  name="chevron-down"
-                  size={wp(6)}
-                  style={styles.DownIcons}
-                />
-              )}
-            </View>
+              </View>
+            </TouchableOpacity>
             {faqQuestion3 ? (
               <Text style={styles.faqAnswer}>
                 Lorem ipsum dolor sit amet dolor sit amet consectetur
@@ -125,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   mainView: {
-    width: '90%',
+    width: '93%',
     alignSelf: 'center',
   },
   termsView: {
@@ -141,7 +119,7 @@ const styles = StyleSheet.create({
   },
 
   faqQuestion: {
-    marginTop: 10,
+    marginVertical: 5,
     color: Colors.GREEN,
     paddingVertical: 7,
   },
@@ -157,16 +135,18 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
     borderTopRightRadius: 10,
-    marginVertical: 3,
+    marginVertical: 8,
   },
 
   DownIcons: {
     color: Colors.BLACK,
-    paddingTop: 17,
+    justifyContent: 'center',
     paddingHorizontal: 10,
+    marginTop: 11,
   },
   faqBody: {
     flexDirection: 'row',
+    width: '100%',
   },
 });
 export default Faq;

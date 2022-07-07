@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   chatUser: {
-    width: '85%',
+    width: '90%',
     borderBottomWidth: 1,
     borderBottomColor: Colors.GREY,
     marginHorizontal: 7,

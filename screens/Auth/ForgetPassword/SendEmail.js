@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   ScrollView,
   TouchableOpacity,
@@ -6,8 +6,13 @@ import {
   StyleSheet,
   TextInput,
   Text,
+  ActivityIndicator,
 } from 'react-native';
 import {Colors} from '../../../components/constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import {toast} from '../../../components/Toast';
+
 import Button from '../../../components/Button';
 import {RFValue} from 'react-native-responsive-fontsize';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -15,10 +20,52 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import {baseUrl} from '../../../Config/BaseUrl';
 
 const VerificationEmail = ({navigation}) => {
-  const verificationCode = () => {
-    navigation.navigate('VerificationForPassword');
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const handleDisableData = () => {
+    toast('loading...');
+  };
+  const sendData = async () => {
+    if (!email) {
+      toast('Please enter your email');
+      return;
+    }
+    setDisabled(true);
+    setLoading(true);
+    await fetch(`${baseUrl}/api/email-send`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        setLoading(false);
+
+        if (res.message === 'email not correct') {
+          toast('invalid email');
+        }
+        setDisabled(false);
+
+        if (res.success === true) {
+          setEmail('');
+          toast(res.message);
+          AsyncStorage.setItem('emailForPassword', email);
+          navigation.navigate('VerificationForPassword');
+        }
+      })
+      .catch(err => {
+        setLoading(false);
+        toast('something went wrong ');
+        setDisabled(false);
+      });
   };
   const GoBack = () => {
     navigation.goBack();
@@ -50,14 +97,23 @@ const VerificationEmail = ({navigation}) => {
               placeholderTextColor={Colors.GREY}
               color={Colors.GREY}
               style={styles.inputs}
+              keyboardType="email-address"
+              value={email}
+              onChangeText={e => setEmail(e)}
             />
           </View>
           <View style={styles.btnView}>
             <Button
               navigation={navigation}
-              label={'Send'}
-              color={Colors.RED}
-              onPress={verificationCode}
+              label={
+                loading ? (
+                  <ActivityIndicator size="small" color={Colors.WHITE} />
+                ) : (
+                  'Send'
+                )
+              }
+              color={disabled ? Colors.DISABLEDCOLOR : Colors.RED}
+              onPress={disabled ? handleDisableData : sendData}
             />
           </View>
         </View>
@@ -74,16 +130,16 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
   },
   mainForBody: {
-    width: '97%',
+    width: '93%',
+    alignSelf: 'center',
     alignItems: 'center',
-    justifyContent: 'center',
     height: '80%',
     flex: 0.9,
   },
   ForgetTextView: {
     marginVertical: 10,
     marginHorizontal: 10,
-    width: '90%',
+    width: '100%',
   },
   ForgetText: {
     fontWeight: 'bold',
@@ -92,8 +148,7 @@ const styles = StyleSheet.create({
   },
   ParaTextView: {
     marginVertical: 5,
-    width: '90%',
-    alignItems: 'center',
+    width: '100%',
   },
   ParaText: {
     color: Colors.GREY,
@@ -101,7 +156,7 @@ const styles = StyleSheet.create({
     fontSize: RFValue(16, 700),
   },
   inputView: {
-    width: '90%',
+    width: '100%',
     borderWidth: 1,
     borderColor: Colors.GREY,
     borderRadius: 10,
@@ -109,9 +164,10 @@ const styles = StyleSheet.create({
   },
   inputs: {
     paddingHorizontal: 10,
+    color: Colors.BLACK,
   },
   btnView: {
-    marginVertical: 65,
+    marginVertical: 55,
     width: '100%',
     alignItems: 'center',
   },

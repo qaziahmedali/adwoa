@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   ResponsevieView: {
-    width: '90%',
+    width: '100%',
   },
 });

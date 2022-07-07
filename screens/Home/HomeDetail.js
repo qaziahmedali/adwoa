@@ -2,39 +2,41 @@ import React from 'react';
 import {ScrollView, Text, View, Image, StyleSheet} from 'react-native';
 import {Colors} from '../../components/constants';
 import {RFValue} from 'react-native-responsive-fontsize';
-
-const HomeDetail = props => {
-  console.log(props);
-
+import {useRoute} from '@react-navigation/native';
+const HomeDetail = () => {
+  // console.log(props);
+  const route = useRoute();
+  const {products} = route.params;
+  console.log('lfkhhbweelfhb', products[0].name);
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.mainImgView}>
           <Image
-            source={require('../../assets/house.jpeg')}
+            source={{
+              uri: `${products[0].image}`,
+            }}
             style={styles.DetailImg}
             resizeMode="contain"
           />
         </View>
         <View style={styles.mainForBody}>
           <View style={styles.mainTextView}>
-            <Text style={styles.mainText}>HOUSE FOR SALE</Text>
+            <Text style={styles.mainText}>{products[0].name}</Text>
           </View>
           <View style={styles.mainPriceView}>
             <View style={styles.reviewView}>
               <Text style={styles.mainViewsText}>18 views</Text>
             </View>
             <View style={styles.priceView}>
-              <Text style={styles.mainPriceText}>$497,346,000</Text>
+              <Text style={styles.mainPriceText}>
+                $&nbsp;{products[0].price}
+              </Text>
             </View>
           </View>
           <View style={styles.mainDescriptionView}>
             <Text style={styles.mainDescriptionText}>About this Item</Text>
-            <Text style={styles.paraTextDescription}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-              mollitia, molestiae quas vel sint commodi repudiandae consequuntur
-              voluptatum laborum numquam blanditiis harum quisquam eius sed odit
-            </Text>
+            <Text style={styles.paraTextDescription}>{products[0].des}</Text>
           </View>
           <View style={styles.mainForOtherBoxes}>
             <View style={styles.mainForBox}>
@@ -42,13 +44,13 @@ const HomeDetail = props => {
                 {/* <Entypo name="location-pin" /> */}
                 Location
               </Text>
-              <Text style={styles.ForBoxBodyValue}>
-                laborum numquam blanditiis
-              </Text>
+              <Text style={styles.ForBoxBodyValue}>{products[0].location}</Text>
             </View>
             <View style={styles.mainForBox}>
               <Text style={styles.ForBoxBody}>Category Name</Text>
-              <Text style={styles.ForBoxBodyValue}>Babies</Text>
+              <Text style={styles.ForBoxBodyValue}>
+                {products[0].category.name}
+              </Text>
             </View>
           </View>
           <View style={styles.sellerDetails}>
@@ -58,8 +60,8 @@ const HomeDetail = props => {
               resizeMode="contain"
             />
             <View>
-              <Text style={styles.ForName}>John</Text>
-              <Text style={styles.ForMobile}>+925658753</Text>
+              <Text style={styles.ForName}>{products[0].user.name}</Text>
+              <Text style={styles.ForMobile}>{products[0].user.phone}</Text>
             </View>
           </View>
         </View>
@@ -92,7 +94,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     fontWeight: 'bold',
     color: Colors.BLACK,
-    fontSize: RFValue(23, 700),
+    fontSize: RFValue(20, 700),
   },
   mainPriceView: {
     width: '100%',

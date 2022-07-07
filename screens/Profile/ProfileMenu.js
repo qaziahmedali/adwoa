@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StyleSheet, Pressable} from 'react-native';
+import {Text, View, StyleSheet, Pressable, ScrollView} from 'react-native';
 import {Colors} from '../../components/constants';
 import {RFValue} from 'react-native-responsive-fontsize';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -12,6 +12,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import Header from '../../components/Header';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const ProfileMenu = ({navigation}) => {
   const handleOrders = () => {
     navigation.navigate('Orders');
@@ -21,6 +22,12 @@ const ProfileMenu = ({navigation}) => {
   };
   const handleChat = () => {
     navigation.navigate('Chat');
+  };
+  const LogOut = async () => {
+    await AsyncStorage.removeItem('userToken');
+    await AsyncStorage.removeItem('userData');
+
+    navigation.navigate('LogoutNow');
   };
   return (
     <View style={styles.container}>
@@ -33,83 +40,116 @@ const ProfileMenu = ({navigation}) => {
       />
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <View style={styles.mainBodyForModal}>
-            <View style={styles.modalInnerCard}>
-              <View style={styles.mainView}>
-                <View style={{flexDirection: 'row'}}>
-                  <Icon name="person" size={wp(5)} style={styles.IconLeft} />
-                  <Text style={styles.menuText}>Profile Update</Text>
+          <View style={{width: '100%'}}>
+            <ScrollView>
+              <View style={styles.mainBodyForModal}>
+                <View style={styles.modalInnerCard}>
+                  <View style={styles.mainView}>
+                    <View style={{flexDirection: 'row'}}>
+                      <Icon
+                        name="person"
+                        size={wp(5)}
+                        style={styles.IconLeft}
+                      />
+                      <Text style={styles.menuText}>Profile Update</Text>
+                    </View>
+                  </View>
+                  <View style={styles.IconView}>
+                    <Pressable onPress={handleProfile}>
+                      <Feather
+                        name="arrow-right"
+                        size={wp(8)}
+                        style={styles.Icon}
+                      />
+                    </Pressable>
+                  </View>
+                </View>
+                <View style={styles.modalInnerCard}>
+                  <View style={styles.mainView}>
+                    <View style={{flexDirection: 'row'}}>
+                      <Icon
+                        name="chatbox"
+                        size={wp(5)}
+                        style={styles.IconLeft}
+                      />
+                      <Text style={styles.menuText}>Chat</Text>
+                    </View>
+                  </View>
+                  <View style={styles.IconView}>
+                    <Pressable onPress={handleChat}>
+                      <Feather
+                        name="arrow-right"
+                        size={wp(8)}
+                        style={styles.Icon}
+                      />
+                    </Pressable>
+                  </View>
+                </View>
+                <View style={styles.modalInnerCard}>
+                  <View style={styles.mainView}>
+                    <View style={{flexDirection: 'row'}}>
+                      <Entypo
+                        name="shopping-bag"
+                        style={styles.IconLeft}
+                        size={wp(5)}
+                      />
+                      <Text style={styles.menuText}>My Orders</Text>
+                    </View>
+                  </View>
+                  <View style={styles.IconView}>
+                    <Pressable onPress={handleOrders}>
+                      <Feather
+                        name="arrow-right"
+                        size={wp(8)}
+                        style={styles.Icon}
+                      />
+                    </Pressable>
+                  </View>
+                </View>
+                <View style={styles.modalInnerCard}>
+                  <View style={styles.mainView}>
+                    <View style={{flexDirection: 'row'}}>
+                      <MaterialIcons
+                        name="attach-money"
+                        size={wp(5)}
+                        style={styles.IconLeft}
+                      />
+                      <Text style={styles.menuText}>Make Money</Text>
+                    </View>
+                  </View>
+                  <View style={styles.IconView}>
+                    <Pressable onPress={handleProfile}>
+                      <Feather
+                        name="arrow-right"
+                        size={wp(8)}
+                        style={styles.Icon}
+                      />
+                    </Pressable>
+                  </View>
+                </View>
+                <View style={styles.modalInnerCard}>
+                  <View style={styles.mainView}>
+                    <View style={{flexDirection: 'row'}}>
+                      <MaterialIcons
+                        name="logout"
+                        size={wp(5)}
+                        style={styles.IconLeft}
+                      />
+                      <Text style={styles.menuText}>Logout</Text>
+                    </View>
+                  </View>
+                  <View style={styles.IconView}>
+                    <Pressable onPress={LogOut}>
+                      <Feather
+                        name="arrow-right"
+                        size={wp(8)}
+                        style={styles.Icon}
+                      />
+                    </Pressable>
+                  </View>
                 </View>
               </View>
-              <View style={styles.IconView}>
-                <Pressable onPress={handleProfile}>
-                  <Feather
-                    name="arrow-right"
-                    size={wp(5)}
-                    style={styles.Icon}
-                  />
-                </Pressable>
-              </View>
-            </View>
-            <View style={styles.modalInnerCard}>
-              <View style={styles.mainView}>
-                <View style={{flexDirection: 'row'}}>
-                  <Icon name="chatbox" size={wp(5)} style={styles.IconLeft} />
-                  <Text style={styles.menuText}>Chat</Text>
-                </View>
-              </View>
-              <View style={styles.IconView}>
-                <Pressable onPress={handleChat}>
-                  <Feather
-                    name="arrow-right"
-                    size={wp(5)}
-                    style={styles.Icon}
-                  />
-                </Pressable>
-              </View>
-            </View>
-            <View style={styles.modalInnerCard}>
-              <View style={styles.mainView}>
-                <View style={{flexDirection: 'row'}}>
-                  <Entypo
-                    name="shopping-bag"
-                    style={styles.IconLeft}
-                    size={wp(5)}
-                  />
-                  <Text style={styles.menuText}>My Orders</Text>
-                </View>
-              </View>
-              <View style={styles.IconView}>
-                <Pressable onPress={handleOrders}>
-                  <Feather
-                    name="arrow-right"
-                    size={wp(5)}
-                    style={styles.Icon}
-                  />
-                </Pressable>
-              </View>
-            </View>
-            <View style={styles.modalInnerCard}>
-              <View style={styles.mainView}>
-                <View style={{flexDirection: 'row'}}>
-                  <MaterialIcons
-                    name="attach-money"
-                    size={wp(5)}
-                    style={styles.IconLeft}
-                  />
-                  <Text style={styles.menuText}>Make Money</Text>
-                </View>
-              </View>
-              <View style={styles.IconView}>
-                <Pressable onPress={handleProfile}>
-                  <Feather
-                    name="arrow-right"
-                    size={wp(5)}
-                    style={styles.Icon}
-                  />
-                </Pressable>
-              </View>
-            </View>
+            </ScrollView>
           </View>
         </View>
       </View>

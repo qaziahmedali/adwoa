@@ -14,6 +14,8 @@ import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {Colors} from './constants';
 import {
   widthPercentageToDP as wp,
@@ -43,6 +45,12 @@ const Header = ({navigation, label, color, menuIcon, align}) => {
   const handleChat = () => {
     navigation.navigate('Chat');
   };
+  const LogOut = async () => {
+    await AsyncStorage.removeItem('userToken');
+    await AsyncStorage.removeItem('userData');
+    navigation.navigate('LogoutNow');
+  };
+
   const GoBack = () => {
     navigation.goBack();
   };
@@ -246,7 +254,13 @@ const Header = ({navigation, label, color, menuIcon, align}) => {
                     />
                   </View>
                   <View style={{width: '80%'}}>
-                    <Text style={styles.MenuText}>Log Out</Text>
+                    <Text
+                      style={styles.MenuText}
+                      onPress={() => {
+                        LogOut();
+                      }}>
+                      Log Out
+                    </Text>
                   </View>
                 </View>
               </ScrollView>

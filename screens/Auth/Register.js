@@ -7,21 +7,28 @@ import {
   Image,
   TextInput,
   Text,
+  ActivityIndicator,
+  Alert,
+  Pressable,
 } from 'react-native';
 
 import {Colors} from '../../components/constants';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
-import {ComplexAnimationBuilder} from 'react-native-reanimated';
 import {toast} from '../../components/Toast';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {baseUrl} from '../../Config/BaseUrl';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const Register = ({navigation}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [passwordVisibility, setPasswordVisibility] = useState(true);
+  const [disabled, setDisabled] = useState(false);
+  const changeIcon = passwordVisibility === true ? false : true;
 
   // random id ...
   var id = '';
@@ -41,48 +48,61 @@ const Register = ({navigation}) => {
       return;
     }
     if (!password) {
-      toast('Pasword must be 6 character at least');
+      toast('Please enter your Pasword');
       return;
     }
-    if (name && email && password) {
-      await fetch(`${baseUrl}/api/register`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-          phone,
-          role: 'seller',
-        }),
-      })
-        // .then(res => JSON.parse(JSON.stringify(res)))
-        .then(res => res.json())
-        .then(res => {
-          if (res.message === 'success') {
-            setName('');
-            setEmail('');
-            setPassword('');
-            setPhone('');
-            toast('Data stored successfully');
-            navigation.navigate('VerificationForEmail');
-
-            AsyncStorage.setItem('email', res.email_message.email);
-          }
-          console.log(res);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    } else {
-      toast('Please Enter all Fields');
+    if (password.length < 5) {
+      toast('password must be atleast 6 characters');
+      return;
     }
+    setDisabled(true);
+    setLoading(true);
+    await fetch(`${baseUrl}/api/register`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+        phone,
+        role: 'seller',
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        setLoading(false);
+        if (res.message === 'This email is already taken.') {
+          toast(res.message);
+        }
+        if (res.message === '"email" must be a valid email') {
+          toast(res.message);
+        }
+        setDisabled(false);
+        if (res.success === true) {
+          setName('');
+          setEmail('');
+          setPassword('');
+          setPhone('');
+
+          toast(res.message);
+
+          navigation.navigate('VerificationForAccount');
+          AsyncStorage.setItem('email', res.data.user.email);
+        }
+      })
+      .catch(err => {
+        setLoading(false);
+        setDisabled(false);
+      });
   };
 
   const Login = () => {
     navigation.navigate('Login');
+  };
+  const handleDisableData = () => {
+    toast('loading...');
   };
   return (
     <View style={styles.container}>
@@ -124,16 +144,28 @@ const Register = ({navigation}) => {
               onChangeText={e => setEmail(e)}
             />
           </View>
-          <View style={styles.inputView}>
+          <View style={styles.inputViewForPassword}>
             <TextInput
               placeholder="Password"
               placeholderTextColor={Colors.GREY}
               color={Colors.GREY}
-              style={styles.inputs}
-              secureTextEntry={true}
+              style={styles.inputForPassword}
+              secureTextEntry={passwordVisibility ? true : false}
               value={password}
               onChangeText={e => setPassword(e)}
             />
+            <Pressable
+              onPress={() => {
+                setPasswordVisibility(changeIcon);
+              }}
+              style={styles.eyeView}>
+              <Icon
+                name={changeIcon ? 'eye' : 'eye-off'}
+                size={22}
+                color={Colors.BLACK}
+                style={styles.eyeIcon}
+              />
+            </Pressable>
           </View>
           <View style={styles.inputView}>
             <TextInput
@@ -149,9 +181,15 @@ const Register = ({navigation}) => {
 
           <Button
             navigation={navigation}
-            label={'Register'}
-            onPress={() => handleData()}
-            color={Colors.RED}
+            label={
+              loading ? (
+                <ActivityIndicator size="large" color={Colors.WHITE} />
+              ) : (
+                'Register'
+              )
+            }
+            color={disabled ? Colors.DISABLEDCOLOR : Colors.RED}
+            onPress={disabled ? handleDisableData : handleData}
           />
           <View style={styles.forgetButton}>
             <TouchableOpacity>
@@ -159,7 +197,7 @@ const Register = ({navigation}) => {
                 navigation={navigation}
                 style={styles.forgetBtnText}
                 onPress={Login}>
-                Already have an account?
+                Already have an account
               </Text>
             </TouchableOpacity>
           </View>
@@ -175,6 +213,8 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   mainForBody: {
+    width: '93%',
+    alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
     flex: 0.9,
@@ -190,14 +230,30 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
   },
   inputView: {
-    width: '90%',
+    width: '100%',
     borderWidth: 1,
     borderColor: Colors.GREY,
     borderRadius: 10,
     marginVertical: 7,
   },
-  forgetButton: {
+  inputForPassword: {
+    paddingHorizontal: 10,
+    color: Colors.BLACK,
     width: '90%',
+  },
+  inputViewForPassword: {
+    width: '100%',
+    borderWidth: 1,
+    borderColor: Colors.GREY,
+    borderRadius: 10,
+    marginVertical: 7,
+    flexDirection: 'row',
+  },
+  eyeView: {
+    alignSelf: 'center',
+  },
+  forgetButton: {
+    width: '100%',
     marginVertical: 4,
   },
   forgetBtnText: {

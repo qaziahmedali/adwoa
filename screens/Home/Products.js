@@ -1,41 +1,80 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Pressable} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Pressable,
+  ActivityIndicator,
+  Text,
+} from 'react-native';
 import {Card, Paragraph} from 'react-native-paper';
+import {Colors} from '../../components/constants';
 
-const Products = ({navigation, products}) => {
+const Products = ({
+  navigation,
+  products,
+  loading,
+  selectedId,
+  defaultLoading,
+}) => {
   const [data, setData] = useState(false);
   const goDetailPage = () => {
-    navigation.navigate('HomeDetail');
+    navigation.navigate('HomeDetail', {
+      products: products,
+    });
     setData(true);
   };
 
   return (
     <View style={{width: '100%'}}>
-      <View style={styles.mainForCard}>
-        {products.map((item, i) => (
-          <View key={i} style={styles.cardMain}>
-            <Pressable onPress={goDetailPage}>
-              <Card style={styles.card}>
-                <Card.Cover
-                  source={{
-                    uri: `${item.imagePath}`,
-                  }}
-                  style={styles.cardImg}
-                />
-                <View style={styles.cardBody}>
-                  <Paragraph style={styles.cardParaTxt}>{item.title}</Paragraph>
-                  <Paragraph>{item.price}</Paragraph>
-                  <View style={styles.cardDangerTxt}>
-                    <Paragraph style={styles.cardEndTxt}>
-                      {item.categoryName && item.categoryName}
-                    </Paragraph>
-                  </View>
+      {!defaultLoading ? (
+        !loading ? (
+          products.length > 0 ? (
+            <View style={styles.mainForCard}>
+              {products.map((item, i) => (
+                <View key={i} style={styles.cardMain}>
+                  <Pressable onPress={goDetailPage}>
+                    <Card style={styles.card}>
+                      <Card.Cover
+                        source={{
+                          uri: `${item.image}`,
+                        }}
+                        style={styles.cardImg}
+                      />
+                      <View style={styles.cardBody}>
+                        <Paragraph style={styles.cardParaTxt}>
+                          {item.name}
+                        </Paragraph>
+                        <Paragraph>
+                          $&nbsp;
+                          {item.price}
+                        </Paragraph>
+                        <View style={styles.cardDangerTxt}>
+                          <Paragraph style={styles.cardEndTxt}>
+                            {item.categoryName && item.categoryName}
+                          </Paragraph>
+                        </View>
+                      </View>
+                    </Card>
+                  </Pressable>
                 </View>
-              </Card>
-            </Pressable>
-          </View>
-        ))}
-      </View>
+              ))}
+            </View>
+          ) : selectedId ? (
+            <Text
+              style={{
+                textAlign: 'center',
+                color: Colors.GREY,
+                marginVertical: 70,
+              }}>
+              No Items found!
+            </Text>
+          ) : null
+        ) : (
+          <ActivityIndicator size="large" color={Colors.BLACK} />
+        )
+      ) : (
+        <ActivityIndicator size="large" color={Colors.BLACK} />
+      )}
     </View>
   );
 };
@@ -79,6 +118,9 @@ const styles = StyleSheet.create({
   cardDangerTxt: {
     width: '100%',
     marginTop: 3,
+  },
+  seeAllText: {
+    color: '#4A73F3',
   },
 });
 export default Products;

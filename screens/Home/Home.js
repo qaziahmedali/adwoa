@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, TextInput, StyleSheet, ScrollView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, TextInput, StyleSheet, ScrollView, Text} from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {Colors} from '../../components/constants';
 import Products from './Products';
@@ -11,30 +11,60 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import Header from '../../components/Header';
+import {baseUrl} from '../../Config/BaseUrl';
+import {toast} from '../../components/Toast';
 const Home = ({navigation}) => {
   const [productsFilterData, setproductsFilterData] = useState([]);
   const [selectedId, setSelectedId] = useState();
+  const [loading, setLoading] = useState(false);
+  const [defaultLoading, setDefaultLoading] = useState(false);
+  const [defaultProducts, setDefaultProducts] = useState('');
+  const [key, setKey] = useState(false);
 
-  const onClickCategory = cid => {
+  const onClickCategory = async cid => {
     setSelectedId(cid);
-    console.log(cid);
-    const newProduct = [...products];
-    const newCategory = [...categories];
-
-    let newMergeProduct = newProduct.map((item, index) => {
-      newCategory.forEach(item2 => {
-        if (item.id === cid) {
-          item = Object.assign(item, item2);
+    setLoading(true);
+    await fetch(`${baseUrl}/api/products/show/${cid}`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        setLoading(false);
+        setKey(false);
+        if (res.success === true) {
+          setproductsFilterData(res.data);
         }
+      })
+      .catch(err => {
+        setKey(false);
+        setLoading(false);
       });
-      return item;
-    });
-    const newFilterProducts = newMergeProduct.filter(
-      item => item.categoryId == cid,
-    );
-    setproductsFilterData(newFilterProducts);
   };
-
+  const ShowAllProducts = async () => {
+    console.log('hlo');
+    setDefaultLoading(true);
+    await fetch(`${baseUrl}/api/products`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(res => {
+        setDefaultLoading(false);
+        setKey(true);
+        setDefaultProducts(res);
+      })
+      .catch(err => {
+        setDefaultLoading(false);
+      });
+  };
+  useEffect(() => {
+    ShowAllProducts();
+  }, []);
   return (
     <View style={styles.container}>
       <Header
@@ -62,17 +92,32 @@ const Home = ({navigation}) => {
           <View style={{width: '100%'}}>
             <Category
               navigation={navigation}
-              categories={categories}
               onClickCategory={onClickCategory}
               selectedId={selectedId}
             />
+          </View>
+          <View style={{width: '100%', alignItems: 'flex-end'}}>
+            <Text style={styles.seeAllText} onPress={() => ShowAllProducts()}>
+              See All
+            </Text>
           </View>
           <View style={{width: '100%'}}>
             <Products
               navigation={navigation}
               products={
-                productsFilterData.length > 0 ? productsFilterData : products
+                key
+                  ? defaultProducts.length > 0
+                    ? defaultProducts
+                    : []
+                  : productsFilterData.length > 0
+                  ? productsFilterData
+                  : []
               }
+              loading={loading}
+              selectedId={selectedId}
+              defaultProducts={defaultProducts}
+              defaultLoading={defaultLoading}
+              key={key}
             />
           </View>
         </View>
@@ -106,6 +151,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     padding: 13,
+  },
+  seeAllText: {
+    color: '#4A73F3',
   },
   centeredView: {
     flex: 1,

@@ -1,5 +1,12 @@
-import React from 'react';
-import {ScrollView, View, StyleSheet, Text} from 'react-native';
+import React, {useState} from 'react';
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  Text,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
 import {Colors} from '../../../components/constants';
 import Button from '../../../components/Button';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -17,44 +24,94 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {toast} from '../../../components/Toast';
-const VerifictaionCode = ({navigation, label}) => {
+const VerifictaionCode = ({navigation, label, type, accountVerification}) => {
   const CELL_COUNT = 5;
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [loadingForMail, setLoadingForMail] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+
   const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({
     value,
     setValue,
   });
+
   // fetching api
   const EnterVerificationCode = async () => {
-    var email = await AsyncStorage.getItem('email');
-    console.log(email, typeof value);
-
+    var emailForAccount = await AsyncStorage.getItem('email');
+    var emailForPassword = await AsyncStorage.getItem('emailForPassword');
+    if (accountVerification) {
+      var email = emailForAccount;
+    } else {
+      var email = emailForPassword;
+    }
+    setDisabled(true);
+    setLoading(true);
     await fetch(`${baseUrl}/api/code-verify`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
       },
       body: JSON.stringify({
-        email,
+        email: email,
         code: value,
-        type: 'verification',
+        type: type,
       }),
     })
       .then(res => res.json())
       .then(res => {
+        setLoading(false);
+        if (res.message === 'verification code incorrect') {
+          toast(res.message);
+        }
+        setDisabled(false);
         if (res.message === 'verified') {
           toast('Email verified');
-          navigation.navigate('NewPassword');
+          if (accountVerification) {
+            navigation.navigate('Login');
+          } else {
+            navigation.navigate('NewPassword');
+          }
         }
-        console.log(res);
       })
       .catch(err => {
-        console.log(err);
+        setLoading(false);
+        setDisabled(false);
       });
   };
   const GoBack = () => {
     navigation.goBack();
+  };
+  const sendOtp = async () => {
+    const email = await AsyncStorage.getItem('emailForPassword');
+    console.log(email);
+    setLoadingForMail(true);
+    await fetch(`${baseUrl}/api/resend-email`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        setLoadingForMail(false);
+        if (res.success === true) {
+          toast(res.message);
+          AsyncStorage.setItem('emailForPassword', email);
+        }
+        console.log(res);
+      })
+      .catch(err => {
+        setLoadingForMail(false);
+        console.log(err);
+      });
+  };
+  const handleDisableData = () => {
+    toast('loading...');
   };
   return (
     <View style={styles.container}>
@@ -77,35 +134,52 @@ const VerifictaionCode = ({navigation, label}) => {
               Verification code has been sent to your email
             </Text>
           </View>
-          {/* verifying Pin Code */}
+          {/* inputs for Pin Code */}
           <View style={{width: '100%'}}>
-            <View style={{width: '90%', alignSelf: 'center'}}>
-              <CodeField
-                ref={ref}
-                {...props}
-                value={value}
-                onChangeText={setValue}
-                cellCount={CELL_COUNT}
-                rootStyle={styles.codeFieldRoot}
-                keyboardType="number-pad"
-                textContentType="oneTimeCode"
-                renderCell={({index, symbol, isFocused}) => (
-                  <Text
-                    key={index}
-                    style={[styles.cell, isFocused && styles.focusCell]}
-                    onLayout={getCellOnLayoutHandler(index)}>
-                    {symbol || (isFocused ? <Cursor /> : null)}
-                  </Text>
-                )}
-              />
-            </View>
+            <CodeField
+              ref={ref}
+              {...props}
+              value={value}
+              onChangeText={setValue}
+              cellCount={CELL_COUNT}
+              rootStyle={styles.codeFieldRoot}
+              keyboardType="number-pad"
+              textContentType="oneTimeCode"
+              renderCell={({index, symbol, isFocused}) => (
+                <Text
+                  key={index}
+                  style={[styles.cell, isFocused && styles.focusCell]}
+                  onLayout={getCellOnLayoutHandler(index)}>
+                  {symbol || (isFocused ? <Cursor /> : null)}
+                </Text>
+              )}
+            />
+          </View>
+          <View style={styles.sendMailButton}>
+            {loadingForMail ? (
+              <Text navigation={navigation} style={styles.sendMailBtnText}>
+                loading...
+              </Text>
+            ) : (
+              <TouchableOpacity onPress={sendOtp}>
+                <Text navigation={navigation} style={styles.sendMailBtnText}>
+                  Resend otp
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
           <View style={styles.btnView}>
             <Button
               navigation={navigation}
-              label={'Next'}
-              onPress={EnterVerificationCode}
-              color={Colors.RED}
+              label={
+                loading ? (
+                  <ActivityIndicator size="small" color={Colors.WHITE} />
+                ) : (
+                  'Next'
+                )
+              }
+              color={disabled ? Colors.DISABLEDCOLOR : Colors.RED}
+              onPress={disabled ? handleDisableData : EnterVerificationCode}
             />
           </View>
         </View>
@@ -119,9 +193,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.WHITE,
   },
   mainForBody: {
-    width: '97%',
+    width: '90%',
+    alignSelf: 'center',
     alignItems: 'center',
-    justifyContent: 'center',
     height: '80%',
     flex: 0.9,
   },
@@ -131,7 +205,7 @@ const styles = StyleSheet.create({
   ForgetTextView: {
     marginVertical: 10,
     marginHorizontal: 10,
-    width: '90%',
+    width: '100%',
   },
   ForgetText: {
     fontWeight: 'bold',
@@ -140,7 +214,7 @@ const styles = StyleSheet.create({
   },
   ParaTextView: {
     marginVertical: 5,
-    width: '90%',
+    width: '100%',
     alignItems: 'center',
   },
   ParaText: {
@@ -149,11 +223,19 @@ const styles = StyleSheet.create({
     fontSize: RFValue(16, 700),
   },
   inputView: {
-    width: '90%',
+    width: '100%',
     borderBottomWidth: 1,
     borderColor: Colors.GREY,
     borderRadius: 10,
     marginVertical: 7,
+  },
+  sendMailButton: {
+    width: '100%',
+    marginVertical: 4,
+  },
+  sendMailBtnText: {
+    color: Colors.GREY,
+    alignSelf: 'flex-end',
   },
   cell: {
     width: 50,

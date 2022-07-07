@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
 
   mainView: {
-    width: '90%',
+    width: '93%',
     alignSelf: 'center',
     alignItems: 'center',
     flex: 0.9,
